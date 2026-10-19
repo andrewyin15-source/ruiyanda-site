@@ -3,6 +3,24 @@
 子域名 **ruiyanda.v-jay.com** → Vercel 静态托管。当前为「建设中」占位页，用于把
 「GitHub → Vercel → 自定义域名 → 火山引擎 DNS」整条链路先打通，内容后续替换。
 
+## 已上线（2026-10-19 验收全绿）
+
+| 项 | 值 |
+|---|---|
+| 正式地址 | **https://ruiyanda.v-jay.com** |
+| 临时地址 | https://ruiyanda-site.vercel.app |
+| GitHub | github.com/andrewyin15-source/ruiyanda-site（public，main） |
+| Vercel 项目 | `ruiyanda-site`（team: test person-15 / Hobby） |
+| DNS 记录 | 火山引擎 · `ruiyanda` CNAME → `70010791befd043c.vercel-dns-017.com`（TTL 600） |
+| 解析结果 | CNAME → 该串 → A `216.198.79.65` |
+| 证书 | Let's Encrypt，`CN=ruiyanda.v-jay.com`，到期 2027-01-17（自动续期） |
+| 传输 | 只收 TLS1.3/1.2；HTTP 308 → HTTPS；HSTS max-age=63072000 |
+| 页面 | 200 / 6482B；CSP（`script-src 'none'`）、X-Frame-Options DENY、COOP、Permissions-Policy 全部生效 |
+
+> 本地排查注意：这台机 Clash 开 fake-ip，`ruiyanda.v-jay.com` 在**本机**会解析成 `198.18.0.x`，
+> 那是占位地址不是真实记录；查真实记录要走 DoH（`dns.alidns.com` / `cloudflare-dns.com`）。
+> 阿里 DoH 曾有 300 秒负缓存，刚加完记录它可能仍回 NXDOMAIN，换 Cloudflare/腾讯 DoH 复核。
+
 ## 目录
 
 | 文件 | 作用 |
