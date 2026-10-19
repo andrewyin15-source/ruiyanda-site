@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>瑞研达 · 官网建设中</title>
+<meta name="description" content="瑞研达官方网站正在建设中。业务咨询请致电 176-8176-2580。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314497B'/%3E%3Ccircle cx='32' cy='26' r='9' fill='%23FAF9F7'/%3E%3Crect x='17' y='41' width='30' height='6' rx='3' fill='%23FAF9F7'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#FAF9F7;
+    --ink:#0E2233;
+    --ink-soft:#4A5A66;
+    --brand:#14497B;
+    --brand-soft:#2F7FA8;
+    --line:rgba(14,34,51,.12);
+    --card:#FFFFFF;
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* 极淡的纸面纹理：两层径向渐变，不请求任何外部资源 */
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:-1;
+    background:
+      radial-gradient(1000px 600px at 12% -10%, rgba(20,73,123,.07), transparent 60%),
+      radial-gradient(900px 500px at 100% 110%, rgba(47,127,168,.06), transparent 55%);
+  }
+  .wrap{
+    max-width:1080px; margin:0 auto;
+    padding:clamp(28px,5vw,64px) clamp(20px,4vw,40px);
+  }
+  header{display:flex; align-items:center; gap:14px}
+  .logo{width:auto; height:clamp(44px,7vw,60px); display:block}
+  .brand{display:flex; flex-direction:column; line-height:1.25}
+  .brand b{font-size:clamp(17px,2.4vw,20px); letter-spacing:.14em; font-weight:600}
+  .brand span{font-size:12px; letter-spacing:.22em; color:var(--ink-soft); text-transform:uppercase}
+
+  main{
+    display:grid; gap:clamp(32px,5vw,72px);
+    grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    align-items:center;
+    padding:clamp(40px,8vw,96px) 0 clamp(32px,6vw,64px);
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; letter-spacing:.18em; color:var(--brand);
+    background:rgba(20,73,123,.07);
+    border:1px solid rgba(20,73,123,.14);
+    padding:6px 12px; border-radius:999px; margin:0 0 22px;
+  }
+  .dot{width:6px; height:6px; border-radius:50%; background:var(--brand); animation:pulse 2.4s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:.35; transform:scale(.85)}50%{opacity:1; transform:scale(1)}}
+
+  h1{
+    margin:0 0 18px;
+    font-size:clamp(30px,5.2vw,54px);
+    line-height:1.18; letter-spacing:.02em; font-weight:650;
+  }
+  h1 em{font-style:normal; color:var(--brand)}
+  .lede{
+    margin:0;
+    max-width:38ch;
+    font-size:clamp(15px,1.7vw,17px);
+    color:var(--ink-soft);
+  }
+
+  .contact{
+    margin-top:clamp(28px,4vw,40px);
+    display:flex; flex-wrap:wrap; gap:14px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:13px 20px; border-radius:12px;
+    font-size:15px; text-decoration:none;
+    background:var(--brand); color:#fff;
+    border:1px solid var(--brand);
+    transition:transform .18s ease, background .18s ease;
+  }
+  .btn:hover{background:#0F3B64; transform:translateY(-1px)}
+  .btn.ghost{background:transparent; color:var(--brand); border-color:rgba(20,73,123,.28)}
+  .btn.ghost:hover{background:rgba(20,73,123,.06)}
+  .btn:focus-visible,.qr-card:focus-visible{outline:2px solid var(--brand-soft); outline-offset:3px}
+
+  .qr-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px;
+    box-shadow:0 1px 2px rgba(14,34,51,.04), 0 18px 44px -28px rgba(14,34,51,.35);
+    text-align:center;
+  }
+  .qr-card img{
+    width:100%; max-width:230px; height:auto; display:block; margin:0 auto 14px;
+    border-radius:10px;
+  }
+  .qr-card p{margin:0; font-size:14px; color:var(--ink-soft)}
+  .qr-card p b{display:block; color:var(--ink); font-size:15px; margin-bottom:4px}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding-top:22px;
+    display:flex; flex-wrap:wrap; gap:10px 24px;
+    justify-content:space-between;
+    font-size:13px; color:var(--ink-soft);
+  }
+  footer a{color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line)}
+  footer a:hover{color:var(--brand); border-color:var(--brand)}
+
+  @media (max-width:760px){
+    main{grid-template-columns:1fr; gap:34px}
+    .lede{max-width:none}
+    .qr-card{order:-1; max-width:340px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" src="assets/logo.jpg" alt="瑞研达" width="600" height="767">
+    <div class="brand">
+      <b>瑞研达</b>
+      <span>Ruiyanda</span>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span>官网建设中</p>
+      <h1>新的站点<em>正在搭建</em>，<br>很快与您见面。</h1>
+      <p class="lede">
+        瑞研达官方网站正在建设中。在此期间，业务咨询、产品与科研服务相关事宜，欢迎直接联系我们。
+      </p>
+      <div class="contact">
+        <a class="btn" href="tel:+8617681762580">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/>
+          </svg>
+          176-8176-2580
+        </a>
+        <a class="btn ghost" href="#qr">扫码联系销售</a>
+      </div>
+    </section>
+
+    <aside class="qr-card" id="qr">
+      <img src="assets/qr.png" alt="瑞研达销售微信二维码" width="420" height="444">
+      <p><b>扫码添加销售微信</b>工作时间 09:00–18:00</p>
+    </aside>
+  </main>
+
+  <footer>
+    <span>© 2026 瑞研达</span>
+    <span>科研内容持续更新于微信公众号「瑞研达生物」 · <a href="tel:+8617681762580">176-8176-2580</a></span>
+  </footer>
+</div>
+</body>
+</html>
