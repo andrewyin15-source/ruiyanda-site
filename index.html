@@ -12,353 +12,7 @@
 <meta property="og:url" content="https://ruiyanda.v-jay.com/">
 <meta name="theme-color" content="#06121D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306121D'/%3E%3Cpath d='M24 14c8 6 8 12 0 18s-8 12 0 18' stroke='%2312A08C' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 14c-8 6-8 12 0 18s8 12 0 18' stroke='%232F6FDB' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
-<style>  /* ============ tokens · 明亮科研风 ============ */
-  :root{
-    --ink:#0C1F2E;
-    --ink-soft:#3E596B;
-    --ink-dim:#5A7284;
-    --paper:#EEF4F9;
-    --card:rgba(255,255,255,.88);
-    --card-2:rgba(255,255,255,.72);
-    --line:rgba(12,31,46,.11);
-    --line-2:rgba(12,31,46,.07);
-    --teal:#0E9C86;
-    --teal-ink:#0A7462;
-    --blue:#2A62CC;
-    --blue-ink:#1B4A9E;
-    --violet:#5B3FA8;
-    --orange:#B85A0B;
-    --pink:#B0235A;
-    --green:#1F7A33;
-    --sky:#14789F;
-    --shadow:0 26px 60px -38px rgba(12,31,46,.55);
-    --radius:16px;
-    --max:1240px;
-    --nav-h:66px;
-  }
-  *{box-sizing:border-box}
-  html{
-    scroll-behavior:smooth;
-    scroll-snap-type:y proximity;
-    scroll-padding-top:var(--nav-h);
-    background:var(--paper);
-  }
-  body{
-    margin:0; color:var(--ink);
-    background:
-      radial-gradient(1100px 640px at 10% -8%, rgba(42,98,204,.10), transparent 60%),
-      radial-gradient(900px 560px at 95% 6%, rgba(14,156,134,.10), transparent 62%),
-      linear-gradient(180deg,#F8FBFD 0%,#EAF2F8 42%,#F4F9FC 100%);
-    background-attachment:fixed;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
-    line-height:1.72; -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  a{color:inherit}
-  img{max-width:100%; height:auto}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4.5vw,48px)}
-  :focus-visible{outline:2px solid var(--blue); outline-offset:3px; border-radius:6px}
-
-  /* ============ 顶部进度条 ============ */
-  .progress{
-    position:fixed; top:0; left:0; right:0; height:3px; z-index:60;
-    background:linear-gradient(90deg,var(--teal),var(--blue),var(--violet));
-    transform:scaleX(0); transform-origin:0 50%;
-  }
-  @supports (animation-timeline: scroll()){
-    .progress{animation:bar linear both; animation-timeline:scroll(root block)}
-    @keyframes bar{from{transform:scaleX(0)} to{transform:scaleX(1)}}
-  }
-
-  /* ============ nav ============ */
-  .nav{
-    position:fixed; top:0; left:0; right:0; z-index:50; height:var(--nav-h);
-    background:rgba(255,255,255,.80); backdrop-filter:saturate(160%) blur(14px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav-in{display:flex; align-items:center; gap:20px; height:var(--nav-h)}
-  .nav-brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink)}
-  .nav-brand img{height:30px; width:auto; border-radius:6px}
-  .nav-brand b{font-weight:650; font-size:15px; letter-spacing:.1em; display:block; line-height:1.2}
-  .nav-brand small{display:block; font-size:9px; letter-spacing:.2em; color:var(--ink-dim)}
-  .nav-links{margin-left:auto; display:flex; gap:28px; align-items:center}
-  .nav-links a{
-    color:var(--ink-soft); text-decoration:none; font-size:13.5px; white-space:nowrap;
-    padding:4px 0; border-bottom:1px solid transparent; transition:color .2s,border-color .2s;
-  }
-  .nav-links a:hover{color:var(--ink); border-color:var(--teal)}
-  .nav-tel{
-    text-decoration:none; font-size:12.5px; font-weight:650; color:#fff;
-    background:linear-gradient(120deg,var(--teal),var(--blue));
-    padding:8px 15px; border-radius:999px; white-space:nowrap;
-  }
-  @media (max-width:900px){ .nav-links{display:none} .nav-tel{margin-left:auto} }
-
-  /* ============ 屏（整屏 + 吸附） ============ */
-  .screen{
-    position:relative; min-height:100svh;
-    scroll-snap-align:start; scroll-snap-stop:always;
-    display:flex; align-items:center;
-    overflow:hidden; isolation:isolate;
-  }
-  /* 每屏一张明亮实验室实拍，上下渐隐融进底色 */
-  .bg{
-    position:absolute; inset:-6% 0; z-index:-2;
-    background-size:cover; background-position:center;
-    opacity:.58;
-    filter:saturate(.92) contrast(.96) brightness(1.04);
-    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 15%, #000 85%, transparent 100%);
-    mask-image:linear-gradient(to bottom, transparent 0, #000 15%, #000 85%, transparent 100%);
-  }
-  .bg-b1{background-image:url(assets/bg-b1.jpg);background-position:center 42%}
-  .bg-b2{background-image:url(assets/bg-b2.jpg);background-position:center 52%}
-  .bg-b3{background-image:url(assets/bg-b3.jpg);background-position:center 34%}
-  .bg-b4{background-image:url(assets/bg-b4.jpg);background-position:center 46%}
-  .bg-b5{background-image:url(assets/bg-b1.jpg);background-position:18% 60%}
-  .bg-b6{background-image:url(assets/bg-b4.jpg);background-position:82% 38%}
-  .bg-b7{background-image:url(assets/bg-b3.jpg);background-position:88% 70%}
-  .bg-b8{background-image:url(assets/bg-b1.jpg);background-position:78% 56%}
-  /* 白色柔光幕：把照片压成通透的浅色底 */
-  .veil{
-    position:absolute; inset:0; z-index:-1;
-    background:
-      radial-gradient(1000px 620px at 12% 10%, var(--g1,rgba(42,98,204,.12)), transparent 62%),
-      radial-gradient(900px 560px at 88% 90%, var(--g2,rgba(14,156,134,.12)), transparent 60%),
-      linear-gradient(180deg, rgba(255,255,255,.82) 0%, rgba(255,255,255,.30) 38%, rgba(240,246,251,.90) 100%);
-  }
-  /* 每屏装饰：超大编号水印 + 柔光色块 */
-  .screen::before{
-    content:var(--no,''); position:absolute; z-index:0; pointer-events:none;
-    right:2.5%; bottom:2%;
-    font-size:clamp(130px,20vw,270px); font-weight:800; line-height:.9;
-    letter-spacing:-.05em;
-    color:color-mix(in srgb, var(--acc,#2A62CC) 10%, transparent);
-  }
-  .screen::after{
-    content:""; position:absolute; z-index:0; pointer-events:none;
-    left:-8%; top:-16%; width:min(760px,70vw); aspect-ratio:1; border-radius:50%;
-    background:radial-gradient(circle, color-mix(in srgb, var(--acc,#2A62CC) 17%, transparent) 0%, transparent 68%);
-    animation:float 26s ease-in-out infinite;
-  }
-  .d-l::before{right:auto; left:1%}
-  .d-c::before{right:50%; transform:translateX(50%); bottom:-14%}
-  @keyframes float{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(-3%,-3%,0) scale(1.07)}}
-  .screen-inner{position:relative; z-index:1; width:100%; padding:calc(var(--nav-h) + 34px) 0 56px}
-
-  /* ============ 通用排版 ============ */
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:9px; margin:0 0 16px;
-    font-size:11.5px; letter-spacing:.24em; text-transform:uppercase;
-    color:var(--teal-ink); font-weight:700;
-  }
-  .eyebrow::before{content:""; width:26px; height:2px; background:var(--teal); display:block}
-  h2{margin:0 0 14px; font-size:clamp(24px,3.4vw,38px); line-height:1.26; font-weight:700; letter-spacing:.01em; color:var(--ink)}
-  .lede{margin:0; max-width:54ch; color:var(--ink-soft); font-size:clamp(14px,1.4vw,16px); text-wrap:pretty}
-  .sec-head{margin-bottom:clamp(24px,3.4vw,42px)}
-
-  /* ============ 屏 1 · Hero ============ */
-  .hero-brand{display:flex; align-items:center; gap:16px; margin-bottom:26px}
-  .hero-brand img{height:clamp(54px,6.4vw,74px); width:auto; border-radius:10px; box-shadow:0 14px 34px -18px rgba(12,31,46,.55)}
-  .hero-brand .cn{font-size:clamp(23px,3.4vw,33px); font-weight:700; letter-spacing:.16em; line-height:1.2; color:var(--ink)}
-  .hero-brand .en{font-size:11px; letter-spacing:.3em; color:var(--ink-dim); margin-top:7px}
-  h1{
-    margin:0 0 20px; max-width:19ch;
-    font-size:clamp(30px,5.4vw,58px); line-height:1.18; font-weight:750; letter-spacing:.01em; color:var(--ink);
-  }
-  h1 em{
-    font-style:normal;
-    background:linear-gradient(100deg,var(--teal-ink),var(--blue-ink) 55%,var(--violet));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
-  }
-  .hero-lede{margin:0 0 30px; max-width:52ch; color:var(--ink-soft); font-size:clamp(15px,1.5vw,17px)}
-  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:32px}
-  .chip{
-    display:inline-flex; align-items:baseline; gap:8px;
-    border:1px solid var(--line); border-radius:999px; padding:7px 16px;
-    font-size:12.5px; color:var(--ink-soft); background:var(--card-2);
-  }
-  .chip b{font-size:18px; color:var(--teal-ink); font-weight:750}
-  .cta{display:flex; flex-wrap:wrap; gap:12px}
-  .btn{
-    display:inline-flex; align-items:center; gap:9px; text-decoration:none;
-    padding:14px 24px; border-radius:12px; font-size:14.5px; font-weight:650;
-    border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-  }
-  .btn-p{background:linear-gradient(120deg,var(--teal),var(--blue)); color:#fff; box-shadow:0 18px 36px -20px rgba(42,98,204,.75)}
-  .btn-p:hover{transform:translateY(-2px)}
-  .btn-g{border-color:var(--line); color:var(--ink); background:var(--card)}
-  .btn-g:hover{background:#fff; border-color:var(--line-hi,rgba(12,31,46,.2)); transform:translateY(-2px)}
-  .scroll-hint{
-    position:absolute; left:50%; bottom:24px; transform:translateX(-50%); z-index:2;
-    display:flex; flex-direction:column; align-items:center; gap:7px;
-    color:var(--ink-dim); font-size:11px; letter-spacing:.2em; text-decoration:none;
-  }
-  .scroll-hint svg{animation:bob 2.4s ease-in-out infinite}
-  @keyframes bob{0%,100%{transform:translateY(0); opacity:.55} 50%{transform:translateY(7px); opacity:1}}
-
-  /* ============ 屏 2 · 双引擎 ============ */
-  .dual{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
-  .engine{
-    position:relative; overflow:hidden;
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:28px; backdrop-filter:blur(10px); box-shadow:var(--shadow);
-    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-  }
-  .engine:hover{transform:translateY(-5px); border-color:color-mix(in srgb,var(--c) 40%,#fff); box-shadow:0 34px 70px -40px rgba(12,31,46,.6)}
-  .engine::before{content:""; position:absolute; inset:0 0 auto; height:4px; background:linear-gradient(90deg,var(--c),color-mix(in srgb,var(--c) 10%,transparent))}
-  .engine .en{font-size:10.5px; letter-spacing:.22em; color:var(--ink-dim); text-transform:uppercase}
-  .engine h3{margin:8px 0 4px; font-size:23px; font-weight:700; color:var(--ink)}
-  .engine>p{margin:12px 0 20px; color:var(--ink-soft); font-size:13.5px}
-  .engine ul{list-style:none; margin:0; padding:0; display:grid; gap:11px; grid-template-columns:1fr 1fr}
-  .engine li{border:1px solid var(--line-2); border-radius:10px; padding:12px 13px; background:color-mix(in srgb,var(--c) 7%,#fff)}
-  .engine li b{display:block; font-size:14px; font-weight:650; color:var(--ink)}
-  .engine li span{display:block; margin-top:3px; font-size:11.5px; color:var(--ink-dim); line-height:1.5}
-  @media (max-width:560px){ .engine ul{grid-template-columns:1fr} }
-
-  /* ============ 屏 3 · 平台总览 ============ */
-  .grid9{display:grid; gap:14px; grid-template-columns:repeat(3,1fr)}
-  .pcard{
-    position:relative; overflow:hidden;
-    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 20px 18px;
-    backdrop-filter:blur(10px); box-shadow:0 18px 40px -32px rgba(12,31,46,.5);
-    transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
-  }
-  .pcard:hover{transform:translateY(-4px); border-color:color-mix(in srgb,var(--c) 40%,#fff); box-shadow:0 30px 60px -36px rgba(12,31,46,.6)}
-  .pcard::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--c)}
-  .pcard .t{display:flex; align-items:baseline; gap:9px; margin-bottom:6px}
-  .pcard h3{margin:0; font-size:16.5px; font-weight:700; color:var(--ink)}
-  .pcard .en{font-size:9.5px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase}
-  .pcard .n{
-    margin-left:auto; font-size:10.5px; font-weight:700; color:var(--ink);
-    background:color-mix(in srgb,var(--c) 15%,#fff);
-    border:1px solid color-mix(in srgb,var(--c) 32%,#fff);
-    border-radius:999px; padding:1px 9px; white-space:nowrap;
-  }
-  .pcard p{margin:0 0 10px; font-size:12.5px; color:var(--ink-soft); line-height:1.6}
-  .pcard .sample{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
-  .pcard .sample li{
-    font-size:11px; color:var(--ink-dim); border:1px solid var(--line-2);
-    border-radius:6px; padding:2px 8px; background:rgba(255,255,255,.7);
-  }
-  @media (max-width:900px){ .grid9{grid-template-columns:repeat(2,1fr)} }
-  @media (max-width:560px){ .grid9{grid-template-columns:1fr} }
-
-  /* ============ 屏 4-6 · 产品明细 ============ */
-  .line-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); align-items:start}
-  .cat{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:20px 22px 14px; backdrop-filter:blur(10px); box-shadow:var(--shadow);
-  }
-  .cat-head{display:flex; align-items:baseline; gap:9px; padding-bottom:11px; border-bottom:1px solid var(--line-2)}
-  .cat-head h3{margin:0; font-size:16.5px; font-weight:700; color:var(--ink)}
-  .cat-head .en{font-size:9.5px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase}
-  .cat-head .count{
-    margin-left:auto; font-size:10.5px; font-weight:700; color:var(--ink);
-    background:color-mix(in srgb,var(--c) 15%,#fff);
-    border:1px solid color-mix(in srgb,var(--c) 32%,#fff);
-    border-radius:999px; padding:1px 9px; white-space:nowrap;
-  }
-  .cat ol{list-style:none; counter-reset:i; margin:0; padding:4px 0 0}
-  .cat li{
-    counter-increment:i; display:grid; grid-template-columns:22px 1fr; gap:10px;
-    padding:8px 0; border-bottom:1px dashed rgba(12,31,46,.10); align-items:start;
-  }
-  .cat li:last-child{border-bottom:0}
-  .cat li::before{
-    content:counter(i); font-size:10.5px; font-weight:700; color:var(--ink);
-    background:color-mix(in srgb,var(--c) 14%,#fff);
-    border:1px solid color-mix(in srgb,var(--c) 30%,#fff);
-    border-radius:5px; text-align:center; line-height:19px; height:20px;
-  }
-  .cat b{display:block; font-size:13.5px; font-weight:650; color:var(--ink); line-height:1.45}
-  .cat .d{display:block; font-size:11.5px; color:var(--ink-dim); line-height:1.5; margin-top:1px}
-
-  /* ============ 活动条 ============ */
-  .promo{
-    display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
-    border:1px solid rgba(184,90,11,.26); border-radius:13px; padding:14px 20px;
-    background:linear-gradient(100deg,rgba(255,244,230,.95),rgba(255,252,247,.9));
-  }
-  .promo .tag{font-size:11.5px; font-weight:700; letter-spacing:.06em; color:#8A4B06; background:#FFE6C7; border-radius:7px; padding:3px 10px; white-space:nowrap}
-  .promo p{margin:0; font-size:13.5px; color:#6E4310}
-  .promo a{margin-left:auto; font-weight:650; color:#A65409; text-decoration:none; border-bottom:1px solid rgba(166,84,9,.35); white-space:nowrap}
-  .promo a:hover{border-color:#A65409}
-
-  /* ============ 屏 7 · 优势 ============ */
-  .s-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
-  .s-item{
-    border:1px solid var(--line); border-radius:14px; padding:22px;
-    background:var(--card); backdrop-filter:blur(10px); box-shadow:0 18px 40px -32px rgba(12,31,46,.5);
-    transition:transform .28s ease, border-color .28s ease;
-  }
-  .s-item:hover{transform:translateY(-4px); border-color:rgba(42,98,204,.3)}
-  .s-item svg{width:26px; height:26px; stroke:var(--teal-ink); fill:none; stroke-width:1.7; margin-bottom:13px}
-  .s-item h3{margin:0 0 7px; font-size:15.5px; font-weight:650; color:var(--ink)}
-  .s-item p{margin:0; font-size:13px; color:var(--ink-soft)}
-
-  /* ============ 屏 8 · 联系 ============ */
-  .contact-grid{display:grid; gap:26px; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:center}
-  .c-list{list-style:none; margin:28px 0 0; padding:0; display:grid; gap:16px}
-  .c-list li{display:flex; gap:15px; align-items:flex-start}
-  .c-list svg{width:21px; height:21px; stroke:var(--teal-ink); fill:none; stroke-width:1.8; flex:none; margin-top:3px}
-  .c-list b{display:block; font-size:12px; color:var(--ink-dim); font-weight:500; letter-spacing:.06em}
-  .c-list a,.c-list .v{font-size:20px; font-weight:700; color:var(--ink); text-decoration:none}
-  .c-list a:hover{color:var(--teal-ink)}
-  .qr-box{
-    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px; text-align:center; backdrop-filter:blur(10px); box-shadow:var(--shadow);
-  }
-  .qr-box img{width:100%; max-width:210px; height:auto; aspect-ratio:1/1; object-fit:contain; border-radius:10px; display:block; margin:0 auto 15px; background:#fff; padding:8px; border:1px solid var(--line-2)}
-  .qr-box b{display:block; font-size:15.5px; color:var(--ink); margin-bottom:5px}
-  .qr-box span{font-size:12.5px; color:var(--ink-dim)}
-  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr} }
-
-  /* ============ 页脚 ============ */
-  .foot{
-    position:relative; z-index:1;
-    border-top:1px solid var(--line); padding:26px 0 30px;
-    background:rgba(255,255,255,.72);
-  }
-  .f-in{display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--ink-dim)}
-  .f-in .slogan{color:var(--ink-soft); letter-spacing:.04em}
-  .f-in a{color:var(--ink-soft); text-decoration:none; border-bottom:1px solid var(--line)}
-  .f-in a:hover{color:var(--ink)}
-
-  /* ============ 滚动驱动动效（渐进增强） ============ */
-  @supports (animation-timeline: view()){
-    .screen .bg{
-      animation:drift linear both;
-      animation-timeline:view();
-      animation-range:cover 0% cover 100%;
-    }
-    @keyframes drift{
-      from{transform:translateY(-3.5%) scale(1.05)}
-      to{transform:translateY(3.5%) scale(1.01)}
-    }
-    .reveal{
-      animation:rise linear both;
-      animation-timeline:view();
-      animation-range:entry 8% entry 72%;
-    }
-    @keyframes rise{
-      from{opacity:0; transform:translateY(34px)}
-      to{opacity:1; transform:none}
-    }
-    .reveal-2{animation-range:entry 14% entry 82%}
-    .reveal-3{animation-range:entry 20% entry 92%}
-  }
-  @media (prefers-reduced-motion:reduce){
-    html{scroll-behavior:auto}
-    *{animation:none !important; transition:none !important}
-    .reveal{opacity:1 !important; transform:none !important}
-  }
-  @media (max-width:900px){
-    html{scroll-snap-type:none}
-    .screen{min-height:auto; padding:0}
-    .screen-inner{padding:calc(var(--nav-h) + 48px) 0 60px}
-    .screen::before{font-size:150px; bottom:-4%}
-  }
-</style>
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 
@@ -367,7 +21,7 @@
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-brand" href="#top">
-      <img src="assets/logo.jpg" alt="瑞研达生物" width="600" height="767">
+      <img src="/assets/logo.jpg" alt="瑞研达生物" width="600" height="767">
       <span><b>瑞研达生物</b><small>RUIYANDA BIOTECHNOLOGY</small></span>
     </a>
     <div class="nav-links">
@@ -387,7 +41,7 @@
   <div class="screen-inner">
     <div class="wrap">
       <div class="hero-brand reveal">
-        <img src="assets/logo.jpg" alt="" width="600" height="767">
+        <img src="/assets/logo.jpg" alt="" width="600" height="767">
         <div>
           <div class="cn">瑞研达生物</div>
           <div class="en">RUIYANDA BIOTECHNOLOGY</div>
@@ -469,51 +123,76 @@
         <p class="lede">从表观调控到翻译表达，从蛋白代谢到微生物与空间组学，一次对接，多维解答。</p>
       </div>
       <div class="grid9">
-        <article class="pcard reveal" style="--c:#12A08C">
+        <a class="pcard reveal" style="--c:#0A7462" href="/platform/epigenomics">
           <div class="t"><h3>表观组学</h3><span class="en">Epigenomics</span><span class="n">9 项</span></div>
-          <p>染色质状态、转录因子结合与基因表达调控机制</p>
-          <ul class="sample"><li>ATAC-seq</li><li>CUT&amp;Tag</li><li>FOODIE</li><li>Hi-C</li></ul>
-        </article>
-        <article class="pcard reveal reveal-2" style="--c:#2F6FDB">
+          <p>表观组学聚焦「基因何时、在何处被打开」——从染色质结构、转录因子结合到 DNA 修饰，解析表观遗传层面的调控机制。</p>
+          <ul class="sample"><li>m⁶A 甲基化测序</li><li>DNA 甲基化测序</li><li>ChIP-seq</li><li>ATAC-seq</li></ul>
+          <span class="more">查看全部 9 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#1B4A9E" href="/platform/translatomics">
           <div class="t"><h3>翻译组学</h3><span class="en">Translatomics</span><span class="n">7 项</span></div>
-          <p>聚焦翻译调控，覆盖基因表达全链条</p>
-          <ul class="sample"><li>Ribo-seq</li><li>Disome-seq</li><li>tRNA-seq</li><li>Poly(A)</li></ul>
-        </article>
-        <article class="pcard reveal reveal-3" style="--c:#7F5BD6">
+          <p>翻译组学研究「转录本如何被翻译成蛋白」，用核糖体足迹、多聚核糖体梯度与长读长技术定量翻译效率及其产物。</p>
+          <ul class="sample"><li>核糖体印迹分析</li><li>翻译碰撞检测</li><li>多聚核糖体图谱分析</li><li>三代翻译组测序</li></ul>
+          <span class="more">查看全部 7 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#5B3FA8" href="/platform/transcriptomics">
           <div class="t"><h3>转录调控组学</h3><span class="en">Transcriptomics</span><span class="n">3 项</span></div>
-          <p>mRNA / lncRNA / circRNA / miRNA 全谱定量</p>
-          <ul class="sample"><li>转录组</li><li>全转录组</li><li>微量全转录组</li></ul>
-        </article>
-        <article class="pcard reveal" style="--c:#E8791E">
+          <p>以 mRNA 与非编码 RNA 为对象，量化转录本丰度与结构变化，锁定差异表达并重建调控网络。</p>
+          <ul class="sample"><li>转录组测序</li><li>全转录组测序</li><li>微量全转录组测序</li></ul>
+          <span class="more">查看全部 3 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#B85A0B" href="/platform/proteomics">
           <div class="t"><h3>蛋白组学</h3><span class="en">Proteomics</span><span class="n">5 项</span></div>
-          <p>标记与无标记定量、修饰组学与高灵敏检测</p>
-          <ul class="sample"><li>TMT</li><li>DIA</li><li>LabelFree</li><li>Olink</li></ul>
-        </article>
-        <article class="pcard reveal reveal-2" style="--c:#E5307A">
+          <p>从蛋白层面刻画细胞状态，既做丰度定量，也做修饰位点解析与高灵敏靶向检测。</p>
+          <ul class="sample"><li>TMT 标记定量蛋白质组学</li><li>LabelFree / 4D-LabelFree</li><li>DIA / 4D-DIA / Astral-DIA</li><li>修饰蛋白质组学</li></ul>
+          <span class="more">查看全部 5 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#B0235A" href="/platform/metabolomics">
           <div class="t"><h3>代谢组学</h3><span class="en">Metabolomics</span><span class="n">6 项</span></div>
-          <p>非靶、定量、脂质、中药与挥发性代谢物分析</p>
-          <ul class="sample"><li>非靶代谢组</li><li>定量脂质组</li><li>中药代谢组</li></ul>
-        </article>
-        <article class="pcard reveal reveal-3" style="--c:#2FAA4A">
+          <p>代谢物是细胞状态的即时读数，以非靶到靶向的多种策略完成全谱筛查与精确定量。</p>
+          <ul class="sample"><li>非靶代谢组</li><li>脂质代谢组</li><li>定量脂质组</li><li>高通量靶向代谢组</li></ul>
+          <span class="more">查看全部 6 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#1F7A33" href="/platform/microbiomics">
           <div class="t"><h3>微生物组学</h3><span class="en">Microbiomics</span><span class="n">5 项</span></div>
-          <p>宏基因组、群落多样性、肿瘤内微生物与单菌测序</p>
-          <ul class="sample"><li>宏基因组</li><li>16S / ITS</li><li>单菌基因组</li></ul>
-        </article>
-        <article class="pcard reveal" style="--c:#2FA3D1">
+          <p>从群落到单菌、从组成到功能，系统解析微生物与宿主及环境之间的互作关系。</p>
+          <ul class="sample"><li>肿瘤内微生物测序</li><li>宏基因组测序</li><li>微生物群落多样性</li><li>全长 16S rDNA 测序</li></ul>
+          <span class="more">查看全部 5 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#14789F" href="/platform/genomics">
           <div class="t"><h3>基因组学</h3><span class="en">Genomics</span><span class="n">2 项</span></div>
-          <p>外显子组与全基因组变异检测</p>
+          <p>从外显子到全基因组捕获序列变异，并解读其在功能与疾病中的意义。</p>
           <ul class="sample"><li>外显子组测序</li><li>基因组重测序</li></ul>
-        </article>
-        <article class="pcard reveal reveal-2" style="--c:#0E9AA7">
+          <span class="more">查看全部 2 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#0A7A83" href="/platform/singlecell">
           <div class="t"><h3>单细胞测序</h3><span class="en">Single Cell</span><span class="n">8 项</span></div>
-          <p>转录组、免疫组、ATAC 与单细胞蛋白组</p>
-          <ul class="sample"><li>10x 3'/5'</li><li>10x ATAC</li><li>华大 C4</li><li>BD</li></ul>
-        </article>
-        <article class="pcard reveal reveal-3" style="--c:#8A6DDB">
+          <p>把分辨率推进到单细胞水平，识别细胞群体的异质性、稀有亚群与细胞间关系。</p>
+          <ul class="sample"><li>10x 单细胞 3' 转录组</li><li>10x 单细胞 5' 免疫组</li><li>10x 单细胞 ATAC</li><li>10x Flex 单细胞转录组</li></ul>
+          <span class="more">查看全部 8 项 →</span>
+        </a>
+        <a class="pcard reveal" style="--c:#6F4FCB" href="/platform/spatial">
           <div class="t"><h3>空间与原位组学</h3><span class="en">Spatial &amp; In Situ</span><span class="n">7 项</span></div>
-          <p>空间转录组、原位测序与空间蛋白质组</p>
-          <ul class="sample"><li>Visium HD</li><li>Xenium</li><li>Stereo-seq</li><li>CODEX</li></ul>
-        </article>
+          <p>把分子信息放回组织空间坐标，回答「谁在什么位置、与谁相邻」的细胞邻域问题。</p>
+          <ul class="sample"><li>空间转录组学</li><li>高清空间转录组</li><li>空间原位转录组学</li><li>华大时空转录组</li></ul>
+          <span class="more">查看全部 7 项 →</span>
+        </a>
+      </div>
+      <div class="guide reveal reveal-2">
+        <ul class="guide-list">
+          <li><b>① 先定科学问题</b><span>是要看调控机制、比较表型差异，还是定位候选标志物</span></li>
+          <li><b>② 再定样本</b><span>细胞、组织、体液、FFPE 还是单细胞悬液</span></li>
+          <li><b>③ 匹配平台</b><span>从九个平台中选取对应技术，必要时做多组学组合</span></li>
+          <li><b>④ 定制交付</b><span>确认分析深度、图表口径与交付清单</span></li>
+        </ul>
+      </div>
+      <div class="guide reveal reveal-2">
+        <ul class="guide-list">
+          <li><b>① 先定科学问题</b><span>是要看调控机制、比较表型差异，还是定位候选标志物</span></li>
+          <li><b>② 再定样本</b><span>细胞、组织、体液、FFPE 还是单细胞悬液</span></li>
+          <li><b>③ 匹配平台</b><span>从九个平台中选取对应技术，必要时做多组学组合</span></li>
+          <li><b>④ 定制交付</b><span>确认分析深度、图表口径与交付清单</span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -531,40 +210,69 @@
         <p class="lede">19 项核心服务，覆盖染色质调控与基因表达全链条。</p>
       </div>
       <div class="line-grid">
-        <article class="cat reveal" style="--c:#12A08C">
+        <article class="cat reveal" style="--c:#0A7462">
           <div class="cat-head"><h3>表观组学</h3><span class="en">Epigenomics</span><span class="count">9 项</span></div>
           <ol>
-            <li><div><b>m⁶A 甲基化测序</b><span class="d">GLORI-seq / MeRIP-seq</span></div></li>
-            <li><div><b>DNA 甲基化测序</b><span class="d">WGBS / 目标区域甲基化</span></div></li>
-            <li><div><b>ChIP-seq</b><span class="d">蛋白-DNA 互作全景解析</span></div></li>
-            <li><div><b>ATAC-seq</b><span class="d">染色质开放性检测</span></div></li>
-            <li><div><b>CUT&amp;Tag</b><span class="d">靶向染色质定位，低起始量</span></div></li>
-            <li><div><b>RIP-seq</b><span class="d">RNA 结合蛋白靶标解析</span></div></li>
-            <li><div><b>Bulk TCR/BCR</b><span class="d">免疫组库多样性分析</span></div></li>
-            <li><div><b>FOODIE</b><span class="d">转录因子结合位点解析</span></div></li>
-            <li><div><b>Hi-C</b><span class="d">三维基因组构象捕获</span></div></li>
+            <li><div><b>m⁶A 甲基化测序</b><span class="d">检测 mRNA 上 m⁶A 修饰的分布。</span></div>
+              <a class="go" href="/product/m6a-methylation" aria-label="查看 m⁶A 甲基化测序 详情">→</a></li>
+            <li><div><b>DNA 甲基化测序</b><span class="d">测定 DNA 上的 5-甲基胞嘧啶分布。</span></div>
+              <a class="go" href="/product/dna-methylation" aria-label="查看 DNA 甲基化测序 详情">→</a></li>
+            <li><div><b>ChIP-seq</b><span class="d">用特异性抗体沉淀目标蛋白或组蛋白修饰结合的 DNA 片段，经建库测序获得全基因组位点分布，是解析蛋白-DNA 互作与组蛋白修饰图谱的经典方法，可与对照样本比较识别差异结合位点。</span></div>
+              <a class="go" href="/product/chip-seq" aria-label="查看 ChIP-seq 详情">→</a></li>
+            <li><div><b>ATAC-seq</b><span class="d">利用 Tn5 转座酶优先切割开放染色质并插入测序接头，通过测序读段的位置推断全基因组可及区域。</span></div>
+              <a class="go" href="/product/atac-seq" aria-label="查看 ATAC-seq 详情">→</a></li>
+            <li><div><b>CUT&amp;Tag</b><span class="d">在完整细胞核内用转座酶直接切割与目标蛋白结合的染色质并插入接头，无需甲醛交联，背景低、起始量需求小，可在低细胞数样本中定位组蛋白修饰与转录因子结合位点。</span></div>
+              <a class="go" href="/product/cut-and-tag" aria-label="查看 CUT&amp;Tag 详情">→</a></li>
+            <li><div><b>RIP-seq</b><span class="d">用抗体免疫沉淀特定 RNA 结合蛋白及其结合的 RNA 复合物，经交联与片段化后测序，获得该蛋白的靶标 RNA 谱；CLIP 类方法在此基础上通过交联位点把结合位置精确到单碱基。</span></div>
+              <a class="go" href="/product/rip-seq" aria-label="查看 RIP-seq 详情">→</a></li>
+            <li><div><b>Bulk TCR/BCR</b><span class="d">对样本中的 T 细胞与 B 细胞免疫受体重排区域进行扩增测序，通过 V(D)J 重组片段比对还原克隆型序列，实现免疫组库的定量刻画与克隆谱追踪。</span></div>
+              <a class="go" href="/product/tcr-bcr" aria-label="查看 Bulk TCR/BCR 详情">→</a></li>
+            <li><div><b>FOODIE</b><span class="d">采用固定化转座酶在活细胞或组织中捕获与转录因子结合的开放 DNA 片段，保留细胞核内的真实微环境与共调控关系，定位精度高，可与表观修饰和表达数据联合构建调控网络。</span></div>
+              <a class="go" href="/product/foodie" aria-label="查看 FOODIE 详情">→</a></li>
+            <li><div><b>Hi-C</b><span class="d">在细胞核内固定并裂解染色质后交联近邻片段，经限制性内切酶消化、末端修复与连接后建库测序，以配对末端信息重建全基因组三维接触频率，识别拓扑关联域等空间结构。</span></div>
+              <a class="go" href="/product/hi-c" aria-label="查看 Hi-C 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal reveal-2" style="--c:#2F6FDB">
+        <article class="cat reveal" style="--c:#1B4A9E">
           <div class="cat-head"><h3>翻译组学</h3><span class="en">Translatomics</span><span class="count">7 项</span></div>
           <ol>
-            <li><div><b>核糖体印迹分析</b><span class="d">超高分辨率 Ribo-seq / 低起始量</span></div></li>
-            <li><div><b>翻译碰撞检测</b><span class="d">Disome-seq</span></div></li>
-            <li><div><b>多聚核糖体图谱分析</b><span class="d">Polysome Profiling / Polysome-seq / RNC-seq</span></div></li>
-            <li><div><b>三代翻译组测序</b><span class="d">isoRNC-seq / isoPolysome-seq</span></div></li>
-            <li><div><b>tRNA 测序</b><span class="d">全长 tRNA-seq / Charged tRNA-seq / tsRNA/tRF-seq</span></div></li>
-            <li><div><b>Poly(A) 尾测序</b><span class="d">PALso-seq / TAIL iso-seq</span></div></li>
-            <li><div><b>翻译多组学联合分析</b><span class="d">小肽 / 微肽挖掘 / 肿瘤新抗原发现</span></div></li>
+            <li><div><b>核糖体印迹分析</b><span class="d">用核糖体与 mRNA 交联后消化核糖体，收集核糖体保护片段建库测序。</span></div>
+              <a class="go" href="/product/ribo-seq" aria-label="查看 核糖体印迹分析 详情">→</a></li>
+            <li><div><b>翻译碰撞检测</b><span class="d">在核糖体印迹基础上通过特定酶切策略富集核糖体碰撞形成的二聚体（disome）信号，碰撞强度反映翻译停滞与核糖体排队，从而区分停滞与无义介导降解等下游命运。</span></div>
+              <a class="go" href="/product/disome-seq" aria-label="查看 翻译碰撞检测 详情">→</a></li>
+            <li><div><b>多聚核糖体图谱分析</b><span class="d">用核糖体与 mRNA 的蔗糖梯度分离收集不同大小的多聚核糖体复合物后测序，按沉降系数归类比较，解析核糖体占位分布；RNC-seq 则通过交联富集核糖体结合的 RNA，获得更完整的翻译相关转录本视图。</span></div>
+              <a class="go" href="/product/polysome" aria-label="查看 多聚核糖体图谱分析 详情">→</a></li>
+            <li><div><b>三代翻译组测序</b><span class="d">直接对翻译相关的 RNA 分子做长读长测序，跨越可变剪接位点与 poly(A) 尾，读长既可用于异构体层面的表达定量，也可结合核糖体关联信息解析异构体特异的翻译调控。</span></div>
+              <a class="go" href="/product/iso-rnaseq" aria-label="查看 三代翻译组测序 详情">→</a></li>
+            <li><div><b>tRNA 测序</b><span class="d">专门针对 tRNA 与其衍生片段（tsRNA/tRF）建库测序，可同时获得转录本全长序列、序列修饰特征与末端丰度分布；Charged tRNA 分析进一步区分已负载氨基酸与未负载的 tRNA，反映翻译机器的实际可用池。</span></div>
+              <a class="go" href="/product/trna-seq" aria-label="查看 tRNA 测序 详情">→</a></li>
+            <li><div><b>Poly(A) 尾测序</b><span class="d">在反转录过程中对 poly(A) 尾进行测序，测定每个转录本尾部长度与末端序列分布，并可结合长读长构建全长转录本视图，直接反映 mRNA 稳定性与翻译起始效率。</span></div>
+              <a class="go" href="/product/polya-tail" aria-label="查看 Poly(A) 尾测序 详情">→</a></li>
+            <li><div><b>翻译多组学联合分析</b><span class="d">以长读长或高灵敏质谱为核心，结合 Ribo-seq 与翻译组数据，在同一批样本上联合解析新翻译事件，把非经典 ORF、框架内 ORF 与小肽序列与抗原肽段进行交叉比对。</span></div>
+              <a class="go" href="/product/translatome-multi" aria-label="查看 翻译多组学联合分析 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal reveal-3" style="--c:#7F5BD6">
+        <article class="cat reveal" style="--c:#5B3FA8">
           <div class="cat-head"><h3>转录调控组学</h3><span class="en">Transcriptomics</span><span class="count">3 项</span></div>
           <ol>
-            <li><div><b>转录组测序</b><span class="d">mRNA 表达谱定量分析</span></div></li>
-            <li><div><b>全转录组测序</b><span class="d">mRNA / lncRNA / circRNA / miRNA</span></div></li>
-            <li><div><b>微量全转录组测序</b><span class="d">FFPE / 外泌体 / 血浆 / 细胞上清等</span></div></li>
+            <li><div><b>转录组测序</b><span class="d">对样本中的 mRNA 进行建库测序，按比对到参考基因组的位置定量表达量，得到全基因表达谱，并通过差异分析筛选变化基因，再做功能富集把差异落到通路层面。</span></div>
+              <a class="go" href="/product/mrna-seq" aria-label="查看 转录组测序 详情">→</a></li>
+            <li><div><b>全转录组测序</b><span class="d">在保留 mRNA 之外同时富集长链非编码 RNA、环状 RNA 与小 RNA 建库测序，一次覆盖多类非编码转录本，并通过链特异性建库区分正义与反义转录本。</span></div>
+              <a class="go" href="/product/total-rna-seq" aria-label="查看 全转录组测序 详情">→</a></li>
+            <li><div><b>微量全转录组测序</b><span class="d">针对极低 RNA 量的样本优化建库流程，兼容 FFPE 降解 RNA、外泌体、血浆与细胞上清等微量材料，通过链特异性建库保留转录本方向信息并降低背景。</span></div>
+              <a class="go" href="/product/low-input-rna-seq" aria-label="查看 微量全转录组测序 详情">→</a></li>
           </ol>
         </article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>表观调控、翻译效率与转录本丰度三层证据可互相印证：先用转录组定位差异表达，再用表观组学追溯调控元件，最后用翻译组学验证是否真的影响到蛋白产出。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>总 RNA、总染色质与单细胞核悬液；细胞系与组织均可，低起始量与 FFPE 方案可评估。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>各组学标准数据集 + 联合分析图表（差异基因、开放性峰与翻译效率的对应关系）+ 解读报告。</p></article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>表观调控、翻译效率与转录本丰度三层证据可互相印证：先用转录组定位差异表达，再用表观组学追溯调控元件，最后用翻译组学验证是否真的影响到蛋白产出。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>总 RNA、总染色质与单细胞核悬液；细胞系与组织均可，低起始量与 FFPE 方案可评估。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>各组学标准数据集 + 联合分析图表（差异基因、开放性峰与翻译效率的对应关系）+ 解读报告。</p></article>
       </div>
     </div>
   </div>
@@ -582,44 +290,72 @@
         <p class="lede">18 项服务，从分子到代谢全景覆盖。</p>
       </div>
       <div class="line-grid">
-        <article class="cat reveal" style="--c:#E8791E">
+        <article class="cat reveal" style="--c:#B85A0B">
           <div class="cat-head"><h3>蛋白组学</h3><span class="en">Proteomics</span><span class="count">5 项</span></div>
           <ol>
-            <li><div><b>TMT 标记定量蛋白质组学</b><span class="d">多重标记定量，多组样本比较</span></div></li>
-            <li><div><b>LabelFree / 4D-LabelFree</b><span class="d">无标记定量，深度覆盖蛋白组</span></div></li>
-            <li><div><b>DIA / 4D-DIA / Astral-DIA</b><span class="d">数据非依赖采集，高稳定性定量</span></div></li>
-            <li><div><b>修饰蛋白质组学</b><span class="d">磷酸化 / 乙酰化 / 泛素化等</span></div></li>
-            <li><div><b>Olink 蛋白质组学</b><span class="d">邻近延伸技术，超高灵敏度</span></div></li>
+            <li><div><b>TMT 标记定量蛋白质组学</b><span class="d">用串联质谱标签对不同样本的肽段进行化学标记，使多个样本在一次质谱运行中共测，通过报告离子比值实现跨样本的相对定量，是多组样本比较的主流方案。</span></div>
+              <a class="go" href="/product/tmt" aria-label="查看 TMT 标记定量蛋白质组学 详情">→</a></li>
+            <li><div><b>LabelFree / 4D-LabelFree</b><span class="d">不做同位素标记，直接依据肽段的保留时间与质荷比进行鉴定，天然离子流强度与飞行时间信息共同支持定量，在高深度与大规模样本比较中表现稳定。</span></div>
+              <a class="go" href="/product/labelfree" aria-label="查看 LabelFree / 4D-LabelFree 详情">→</a></li>
+            <li><div><b>DIA / 4D-DIA / Astral-DIA</b><span class="d">采用全离子碎片化并行采集的采集策略，不依赖特定 MS/MS 事件触发，循环稳定、重现性好；引入离子淌度维度后进一步提升复杂度样本的区分能力。</span></div>
+              <a class="go" href="/product/dia" aria-label="查看 DIA / 4D-DIA / Astral-DIA 详情">→</a></li>
+            <li><div><b>修饰蛋白质组学</b><span class="d">在蛋白酶解后用特异性抗体富集修饰肽段再做质谱鉴定，定位到具体残基位点，配套的糖基化分析则通过特异性标记与多级质谱策略解析位点与结构。</span></div>
+              <a class="go" href="/product/ptm-proteomics" aria-label="查看 修饰蛋白质组学 详情">→</a></li>
+            <li><div><b>Olink 蛋白质组学</b><span class="d">采用邻近延伸技术，两条带标签的抗体同时结合目标蛋白后寡核苷酸延伸形成可量化的信号，检测灵敏度极高，特别适合体液中低丰度蛋白与细胞因子网络的定量。</span></div>
+              <a class="go" href="/product/olink" aria-label="查看 Olink 蛋白质组学 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal reveal-2" style="--c:#E5307A">
+        <article class="cat reveal" style="--c:#B0235A">
           <div class="cat-head"><h3>代谢组学</h3><span class="en">Metabolomics</span><span class="count">6 项</span></div>
           <ol>
-            <li><div><b>非靶代谢组</b><span class="d">全谱代谢物筛查</span></div></li>
-            <li><div><b>脂质代谢组</b><span class="d">脂质分子全谱解析</span></div></li>
-            <li><div><b>定量脂质组</b><span class="d">关键脂质精确定量</span></div></li>
-            <li><div><b>高通量靶向代谢组</b><span class="d">目标代谢物精确定量</span></div></li>
-            <li><div><b>中药代谢组</b><span class="d">中药成分与体内代谢</span></div></li>
-            <li><div><b>顶空 GCMS 代谢组学</b><span class="d">挥发性代谢物分析</span></div></li>
+            <li><div><b>非靶代谢组</b><span class="d">不做预设靶标，对样本中可检测的小分子做全谱采集，通过保留时间与二级质谱谱库比对完成代谢物注释，可发现未知差异代谢物，是代谢标志物探索的起点。</span></div>
+              <a class="go" href="/product/untargeted-metabolomics" aria-label="查看 非靶代谢组 详情">→</a></li>
+            <li><div><b>脂质代谢组</b><span class="d">针对脂质分子类别进行专门的全谱检测，覆盖多个脂质大类的分子种与结构异构体，输出以脂质亚类与分子种为单位的定量矩阵，刻画膜脂与信号脂质的整体变化。</span></div>
+              <a class="go" href="/product/lipidomics" aria-label="查看 脂质代谢组 详情">→</a></li>
+            <li><div><b>定量脂质组</b><span class="d">在非靶全谱的基础上锁定关键脂质分子做高选择性定量，常配合同位素内标进行绝对定量，重复性与灵敏度都优于非靶结果，适合机制验证阶段。</span></div>
+              <a class="go" href="/product/targeted-lipidomics" aria-label="查看 定量脂质组 详情">→</a></li>
+            <li><div><b>高通量靶向代谢组</b><span class="d">预先设定目标代谢物清单并为其建立专属方法与定量标准，用高选择性离子对监测实现大批量样本的精确检测，兼顾通量与定量可靠性。</span></div>
+              <a class="go" href="/product/targeted-metabolomics" aria-label="查看 高通量靶向代谢组 详情">→</a></li>
+            <li><div><b>中药代谢组</b><span class="d">把中药或复方给药前后的多成分代谢谱与体内代谢物谱对照分析，追踪原型成分与代谢产物的转化路径，并对关键成分做靶向确证。</span></div>
+              <a class="go" href="/product/tcm-metabolomics" aria-label="查看 中药代谢组 详情">→</a></li>
+            <li><div><b>顶空 GCMS 代谢组学</b><span class="d">利用顶空进样让挥发性组分直接进入气相色谱，与质谱联用实现挥发性代谢物的分离与鉴定，兼具定量能力与保留指数辅助的库匹配。</span></div>
+              <a class="go" href="/product/gcms-headspace" aria-label="查看 顶空 GCMS 代谢组学 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal reveal-3" style="--c:#2FAA4A">
+        <article class="cat reveal" style="--c:#1F7A33">
           <div class="cat-head"><h3>微生物组学</h3><span class="en">Microbiomics</span><span class="count">5 项</span></div>
           <ol>
-            <li><div><b>肿瘤内微生物测序</b><span class="d">肿瘤微环境微生物组解析</span></div></li>
-            <li><div><b>宏基因组测序</b><span class="d">全群落功能与物种组成</span></div></li>
-            <li><div><b>微生物群落多样性</b><span class="d">16S / ITS 测序</span></div></li>
-            <li><div><b>全长 16S rDNA 测序</b><span class="d">种水平高分辨分类鉴定</span></div></li>
-            <li><div><b>单菌基因组和原核转录组</b><span class="d">基因组组装与表达调控</span></div></li>
+            <li><div><b>肿瘤内微生物测序</b><span class="d">针对肿瘤组织中含量极低的微生物信号做专项检测，通过严格对照与去污染策略区分真实微生物序列与背景噪声，并给出菌种组成与丰度，刻画肿瘤微环境中的微生物定植情况。</span></div>
+              <a class="go" href="/product/tumor-microbiome" aria-label="查看 肿瘤内微生物测序 详情">→</a></li>
+            <li><div><b>宏基因组测序</b><span class="d">不对样本中的微生物做单菌分离，直接提取环境总 DNA 建库测序，同时获得群落的物种组成与功能基因信息，通过 binning 还能还原出部分未培养微生物的基因组草图。</span></div>
+              <a class="go" href="/product/metagenomics" aria-label="查看 宏基因组测序 详情">→</a></li>
+            <li><div><b>微生物群落多样性</b><span class="d">对细菌 16S 或真菌 ITS 区域的保守区段做高深度扩增测序，基于序列变异构建群落组成谱，计算 α/β 多样性并做差异菌群与标志物种分析，是菌群研究的标准入口方案。</span></div>
+              <a class="go" href="/product/16s-its" aria-label="查看 微生物群落多样性 详情">→</a></li>
+            <li><div><b>全长 16S rDNA 测序</b><span class="d">扩增并测序 16S rRNA 基因全长序列，保留多个可变区的信息，可结合现代分类数据库在物种水平甚至菌株水平做精确鉴定与系统发育分析。</span></div>
+              <a class="go" href="/product/full-length-16s" aria-label="查看 全长 16S rDNA 测序 详情">→</a></li>
+            <li><div><b>单菌基因组和原核转录组</b><span class="d">对纯化单菌做全基因组测序完成组装与注释，同时对该菌做转录组测序，两套数据联合起来把基因型与表达型对应起来，解释菌株的代谢能力与调控状态。</span></div>
+              <a class="go" href="/product/single-genome" aria-label="查看 单菌基因组和原核转录组 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal" style="--c:#2FA3D1">
+        <article class="cat reveal" style="--c:#14789F">
           <div class="cat-head"><h3>基因组学</h3><span class="en">Genomics</span><span class="count">2 项</span></div>
           <ol>
-            <li><div><b>外显子组测序</b><span class="d">外显子区域高效捕获，疾病变异筛查</span></div></li>
-            <li><div><b>基因组重测序</b><span class="d">全基因组变异检测，群体遗传分析</span></div></li>
+            <li><div><b>外显子组测序</b><span class="d">用探针捕获基因组中全部外显子区域建库测序，把测序深度集中到编码区，在覆盖编码变异的同时显著控制数据量，是遗传病研究与临床检测的常用方案。</span></div>
+              <a class="go" href="/product/exome-seq" aria-label="查看 外显子组测序 详情">→</a></li>
+            <li><div><b>基因组重测序</b><span class="d">对全基因组做等深测序，不做区域捕获，可同时获得编码区与非编码区信息，为结构变异、拷贝数、嵌合与群体水平分析提供基础。</span></div>
+              <a class="go" href="/product/wgs" aria-label="查看 基因组重测序 详情">→</a></li>
           </ol>
         </article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>蛋白与代谢给出细胞表型的即时读数，微生物与基因组提供环境与遗传背景，四个层面组合可把「表型差异」一路追到「机制来源」。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>细胞与组织裂解液、血清血浆、尿液、粪便与拭子、外周血与口腔拭子等，按方案要求制备。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>定量矩阵与差异统计、功能富集与通路分析、关键分子靶向确证，以及跨组学的关联分析与解读报告。</p></article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>蛋白与代谢给出细胞表型的即时读数，微生物与基因组提供环境与遗传背景，四个层面组合可把「表型差异」一路追到「机制来源」。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>细胞与组织裂解液、血清血浆、尿液、粪便与拭子、外周血与口腔拭子等，按方案要求制备。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>定量矩阵与差异统计、功能富集与通路分析、关键分子靶向确证，以及跨组学的关联分析与解读报告。</p></article>
       </div>
     </div>
   </div>
@@ -637,31 +373,56 @@
         <p class="lede">15 项前沿服务，把分辨率推进到单细胞与组织原位。</p>
       </div>
       <div class="line-grid">
-        <article class="cat reveal" style="--c:#0E9AA7">
+        <article class="cat reveal" style="--c:#0A7A83">
           <div class="cat-head"><h3>单细胞测序</h3><span class="en">Single Cell</span><span class="count">8 项</span></div>
           <ol>
-            <li><div><b>10x 单细胞 3' 转录组</b><span class="d">高通量单细胞表达谱</span></div></li>
-            <li><div><b>10x 单细胞 5' 免疫组</b><span class="d">免疫受体库与克隆型分析</span></div></li>
-            <li><div><b>10x 单细胞 ATAC</b><span class="d">单细胞染色质可及性</span></div></li>
-            <li><div><b>10x Flex 单细胞转录组</b><span class="d">探针捕获，兼容 FFPE 样本</span></div></li>
-            <li><div><b>墨卓单细胞转录组</b><span class="d">国产高通量平台方案</span></div></li>
-            <li><div><b>华大单细胞测序 C4</b><span class="d">高通量单细胞 RNA 测序</span></div></li>
-            <li><div><b>BD 单细胞转录组/免疫组</b><span class="d">微孔板单细胞方案</span></div></li>
-            <li><div><b>BD 单细胞蛋白组学</b><span class="d">单细胞水平蛋白标志物检测</span></div></li>
+            <li><div><b>10x 单细胞 3' 转录组</b><span class="d">基于微流控液滴的油包水体系，把单个细胞与其转录本分别封装在液滴内建库测序，3 端策略读长短、通量高，配套完整的细胞分群与标记基因注释流程。</span></div>
+              <a class="go" href="/product/10x-3prime" aria-label="查看 10x 单细胞 3' 转录组 详情">→</a></li>
+            <li><div><b>10x 单细胞 5' 免疫组</b><span class="d">在 5 端捕获转录本并同时富集 V(D)J 受体区域，实现单细胞水平同时获得基因表达谱与免疫受体序列，是解析免疫细胞克隆结构与功能状态的组合方案。</span></div>
+              <a class="go" href="/product/10x-5prime-immune" aria-label="查看 10x 单细胞 5' 免疫组 详情">→</a></li>
+            <li><div><b>10x 单细胞 ATAC</b><span class="d">在单细胞核内用转座酶标记开放染色质并建库测序，同时获得每个细胞的可及性谱与转录组信息，可解析细胞状态与染色质调控的对应关系。</span></div>
+              <a class="go" href="/product/10x-atac" aria-label="查看 10x 单细胞 ATAC 详情">→</a></li>
+            <li><div><b>10x Flex 单细胞转录组</b><span class="d">采用探针捕获式建库，先把转录本锚定到寡核苷酸探针上再统一捕获建库，既能兼容 FFPE 等降解样本，也能通过哈希标记实现多样本混样。</span></div>
+              <a class="go" href="/product/10x-flex" aria-label="查看 10x Flex 单细胞转录组 详情">→</a></li>
+            <li><div><b>墨卓单细胞转录组</b><span class="d">基于微孔板固定化细胞的技术路线，每个孔捕获一个细胞并原位完成裂解与建库，细胞定位信息被保留，可与显微影像做细胞级对应。</span></div>
+              <a class="go" href="/product/mo-micro" aria-label="查看 墨卓单细胞转录组 详情">→</a></li>
+            <li><div><b>华大单细胞测序 C4</b><span class="d">依托国产单细胞平台的液滴/芯片体系完成单细胞 RNA 测序，通量与试剂体系稳定，配合标准分析流程可获得细胞分群与差异表达结果。</span></div>
+              <a class="go" href="/product/mgi-c4" aria-label="查看 华大单细胞测序 C4 详情">→</a></li>
+            <li><div><b>BD 单细胞转录组/免疫组</b><span class="d">以微孔板阵列逐孔装载单个细胞完成液滴内建库，可配置捕获区段与免疫受体富集模块，兼顾单细胞表达谱与免疫受体信息的获取。</span></div>
+              <a class="go" href="/product/bd-sc-rna" aria-label="查看 BD 单细胞转录组/免疫组 详情">→</a></li>
+            <li><div><b>BD 单细胞蛋白组学</b><span class="d">在单细胞水平对目标蛋白做多重检测，结合专一的抗体条带与数字化读出系统，量化每个细胞内数十种蛋白标志物的表达，实现蛋白层面的单细胞异质性刻画。</span></div>
+              <a class="go" href="/product/bd-sc-protein" aria-label="查看 BD 单细胞蛋白组学 详情">→</a></li>
           </ol>
         </article>
-        <article class="cat reveal reveal-2" style="--c:#8A6DDB">
+        <article class="cat reveal" style="--c:#6F4FCB">
           <div class="cat-head"><h3>空间与原位组学</h3><span class="en">Spatial &amp; In Situ</span><span class="count">7 项</span></div>
           <ol>
-            <li><div><b>空间转录组学</b><span class="d">10x cytAssist</span></div></li>
-            <li><div><b>高清空间转录组</b><span class="d">10x Visium HD</span></div></li>
-            <li><div><b>空间原位转录组学</b><span class="d">10x Xenium</span></div></li>
-            <li><div><b>华大时空转录组</b><span class="d">Stereo-seq</span></div></li>
-            <li><div><b>华大时空蛋白组</b><span class="d">Stereo CITE-seq</span></div></li>
-            <li><div><b>空间单细胞蛋白质组学 PCF</b><span class="d">CODEX</span></div></li>
-            <li><div><b>空间代谢组</b><span class="d">组织原位代谢物空间分布</span></div></li>
+            <li><div><b>空间转录组学</b><span class="d">在组织切片上按空间坐标捕获表达信息，spot 内的细胞与空间位置一并保留，后续可结合显微图像对目标区域做 cytAssist 精细取样再上机，提高目标区域的空间分辨率。</span></div>
+              <a class="go" href="/product/spatial-cytassist" aria-label="查看 空间转录组学 详情">→</a></li>
+            <li><div><b>高清空间转录组</b><span class="d">把连续组织表面划分为密集的方形小格（bin）分别捕获表达，在保持组织连续性的同时把空间分辨率推进到亚细胞级别，可按 bin 大小灵活调整信息量与灵敏度的平衡。</span></div>
+              <a class="go" href="/product/visium-hd" aria-label="查看 高清空间转录组 详情">→</a></li>
+            <li><div><b>空间原位转录组学</b><span class="d">在组织切片上用携带编码序列的探针原位杂交并逐分子解码，直接对单个细胞做靶向转录组检测，空间定位精确到单细胞水平，适合已知靶标的精细空间分析。</span></div>
+              <a class="go" href="/product/xenium" aria-label="查看 空间原位转录组学 详情">→</a></li>
+            <li><div><b>华大时空转录组</b><span class="d">以空间分辨的球形微珠阵列在组织上原位捕获分子，单个微珠对应亚细胞级坐标，配合大视场成像可覆盖整张切片并与病理图像精准配准。</span></div>
+              <a class="go" href="/product/stereo-seq" aria-label="查看 华大时空转录组 详情">→</a></li>
+            <li><div><b>华大时空蛋白组</b><span class="d">在空间转录组同一位点并行检测蛋白标志物，把转录本与蛋白信息在同一空间坐标上对齐，实现 RNA 与蛋白的多模态空间测量。</span></div>
+              <a class="go" href="/product/stereo-cite-seq" aria-label="查看 华大时空蛋白组 详情">→</a></li>
+            <li><div><b>空间单细胞蛋白质组学 PCF</b><span class="d">通过荧光染料的光漂白循环逐轮成像，配合抗体条带在原位反复检测数十种蛋白，实现单细胞分辨率的空间多重蛋白成像。</span></div>
+              <a class="go" href="/product/codex" aria-label="查看 空间单细胞蛋白质组学 PCF 详情">→</a></li>
+            <li><div><b>空间代谢组</b><span class="d">在组织原位直接检测与定位代谢物，把代谢信息与其所在组织结构和细胞邻域对应起来，突破常规代谢组只能给出整体样本读数的限制。</span></div>
+              <a class="go" href="/product/spatial-metabolomics" aria-label="查看 空间代谢组 详情">→</a></li>
           </ol>
         </article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>单细胞把分辨率推进到细胞水平，空间与原位把信息放回组织坐标。两者结合可回答「哪一群细胞、位于何处、与谁相邻」。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>新鲜单细胞悬液、冻存样本、FFPE 样本（探针捕获方案）、新鲜冷冻与 FFPE 组织切片。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>细胞类型注释与空间域识别、细胞邻域与微环境分析、影像配准结果、原始矩阵与解读报告。</p></article>
+      </div>
+      <div class="line-note">
+        <article class="dcard"><h3>本组怎么用</h3><p>单细胞把分辨率推进到细胞水平，空间与原位把信息放回组织坐标。两者结合可回答「哪一群细胞、位于何处、与谁相邻」。</p></article>
+        <article class="dcard"><h3>样本要求</h3><p>新鲜单细胞悬液、冻存样本、FFPE 样本（探针捕获方案）、新鲜冷冻与 FFPE 组织切片。</p></article>
+        <article class="dcard"><h3>交付内容</h3><p>细胞类型注释与空间域识别、细胞邻域与微环境分析、影像配准结果、原始矩阵与解读报告。</p></article>
       </div>
     </div>
   </div>
@@ -684,6 +445,28 @@
           <h3>全流程严格质控</h3>
           <p>交付周期短、稳定性高，关键节点可追溯。</p>
         </div>
+      <div class="flow reveal reveal-3">
+        <div class="flow-t">从咨询到交付 · 标准服务流程</div>
+        <ol class="flow-list">
+          <li><b>需求沟通</b><span>明确课题问题、样本类型与预期结论</span></li>
+          <li><b>方案设计</b><span>推荐技术路线，必要时给出多组学组合</span></li>
+          <li><b>样本评估</b><span>确认样本形态、量级与质控标准</span></li>
+          <li><b>建库测序</b><span>标准化实验流程，关键节点全程质控</span></li>
+          <li><b>生信分析</b><span>按课题定制分析路径与图表</span></li>
+          <li><b>结果交付</b><span>原始数据、分析结果与解读报告</span></li>
+        </ol>
+      </div>
+      <div class="flow reveal reveal-3">
+        <div class="flow-t">从咨询到交付 · 标准服务流程</div>
+        <ol class="flow-list">
+          <li><b>需求沟通</b><span>明确课题问题、样本类型与预期结论</span></li>
+          <li><b>方案设计</b><span>推荐技术路线，必要时给出多组学组合</span></li>
+          <li><b>样本评估</b><span>确认样本形态、量级与质控标准</span></li>
+          <li><b>建库测序</b><span>标准化实验流程，关键节点全程质控</span></li>
+          <li><b>生信分析</b><span>按课题定制分析路径与图表</span></li>
+          <li><b>结果交付</b><span>原始数据、分析结果与解读报告</span></li>
+        </ol>
+      </div>
         <div class="s-item reveal reveal-2">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M5.5 6.5l4 4M18.5 6.5l-4 4"/><ellipse cx="12" cy="16" rx="7" ry="4"/></svg>
           <h3>样本兼容广</h3>
@@ -704,6 +487,24 @@
         <span class="tag">限时活动</span>
         <p>表观组学热门项目特惠：ATAC-seq、CUT&amp;Tag 限时活动，详情请咨询 <strong>176-8176-2580</strong>（微信同号）</p>
         <a href="#contact">获取报价 →</a>
+      </div>
+      <div class="faq reveal reveal-2">
+        <h3>常见问题</h3>
+        <details><summary>样本量不够时还能做吗？</summary><p class="faq-a">可以。我们提供低起始量方案，并可先对样本做评估，给出可行性判断与替代技术路线（如探针捕获、核内转录组等），再确定方案。</p></details>
+        <details><summary>能否多种组学联合设计？</summary><p class="faq-a">可以，这也是我们的主要服务方式之一。多组学联合方案会围绕同一个科学问题设计，用一次取样回答多个层面的问题，减少重复消耗。</p></details>
+        <details><summary>数据交付包含哪些内容？</summary><p class="faq-a">包含原始数据、标准分析结果、图表与解读报告。分析深度可按课题需求定制，报告会以能直接用于组会与投稿的格式组织。</p></details>
+        <details><summary>保密与数据归属如何处理？</summary><p class="faq-a">可按需签署保密协议。项目数据与样本信息仅用于本课题的方案与分析，交付后按约定归档或销毁。</p></details>
+        <details><summary>费用如何计算？</summary><p class="faq-a">费用与所选技术、样本量、样本类型以及分析深度相关。建议先沟通课题与样本情况，我们给出方案与报价单后再推进。</p></details>
+        <details><summary>周期一般多久？</summary><p class="faq-a">周期取决于方案、样本状态与分析深度。建议在启动前确认关键时间节点，我们会给出排期说明；急件可提前沟通评估。</p></details>
+      </div>
+      <div class="faq reveal reveal-2">
+        <h3>常见问题</h3>
+        <details><summary>样本量不够时还能做吗？</summary><p class="faq-a">可以。我们提供低起始量方案，并可先对样本做评估，给出可行性判断与替代技术路线（如探针捕获、核内转录组等），再确定方案。</p></details>
+        <details><summary>能否多种组学联合设计？</summary><p class="faq-a">可以，这也是我们的主要服务方式之一。多组学联合方案会围绕同一个科学问题设计，用一次取样回答多个层面的问题，减少重复消耗。</p></details>
+        <details><summary>数据交付包含哪些内容？</summary><p class="faq-a">包含原始数据、标准分析结果、图表与解读报告。分析深度可按课题需求定制，报告会以能直接用于组会与投稿的格式组织。</p></details>
+        <details><summary>保密与数据归属如何处理？</summary><p class="faq-a">可按需签署保密协议。项目数据与样本信息仅用于本课题的方案与分析，交付后按约定归档或销毁。</p></details>
+        <details><summary>费用如何计算？</summary><p class="faq-a">费用与所选技术、样本量、样本类型以及分析深度相关。建议先沟通课题与样本情况，我们给出方案与报价单后再推进。</p></details>
+        <details><summary>周期一般多久？</summary><p class="faq-a">周期取决于方案、样本状态与分析深度。建议在启动前确认关键时间节点，我们会给出排期说明；急件可提前沟通评估。</p></details>
       </div>
     </div>
   </div>
@@ -736,10 +537,20 @@
           </ul>
         </div>
         <aside class="qr-box reveal reveal-2">
-          <img src="assets/qr-440.png" alt="瑞研达生物销售微信二维码" width="440" height="440">
+          <img src="/assets/qr-440.png" alt="瑞研达生物销售微信二维码" width="440" height="440">
           <b>微信扫码</b>
           <span>获取方案与报价</span>
         </aside>
+      </div>
+      <div class="coop reveal reveal-2">
+        <article class="dcard"><h3>直接咨询</h3><p>电话或微信说明课题方向与样本类型，我们先判断技术路线是否可行，再进入方案环节。</p></article>
+        <article class="dcard"><h3>定制方案</h3><p>提供课题背景与样本信息，获取技术路线建议、样本要求确认与正式报价单。</p></article>
+        <article class="dcard"><h3>长期合作</h3><p>课题组或企业可建立稳定的服务方案，约定交付口径与沟通流程，减少每次启动的沟通成本。</p></article>
+      </div>
+      <div class="coop reveal reveal-2">
+        <article class="dcard"><h3>直接咨询</h3><p>电话或微信说明课题方向与样本类型，我们先判断技术路线是否可行，再进入方案环节。</p></article>
+        <article class="dcard"><h3>定制方案</h3><p>提供课题背景与样本信息，获取技术路线建议、样本要求确认与正式报价单。</p></article>
+        <article class="dcard"><h3>长期合作</h3><p>课题组或企业可建立稳定的服务方案，约定交付口径与沟通流程，减少每次启动的沟通成本。</p></article>
       </div>
     </div>
   </div>
