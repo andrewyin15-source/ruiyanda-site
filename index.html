@@ -10,253 +10,329 @@
 <meta property="og:title" content="瑞研达生物 · 多组学一站式科研服务平台">
 <meta property="og:description" content="表观 × 翻译双引擎驱动，九大组学平台 52 项科研服务，全流程质控，一站式方案设计。">
 <meta property="og:url" content="https://ruiyanda.v-jay.com/">
-<meta name="theme-color" content="#0B2233">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B2233'/%3E%3Cpath d='M24 14c8 6 8 12 0 18s-8 12 0 18' stroke='%2312A08C' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 14c-8 6-8 12 0 18s8 12 0 18' stroke='%232F6FDB' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#06121D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2306121D'/%3E%3Cpath d='M24 14c8 6 8 12 0 18s-8 12 0 18' stroke='%2312A08C' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3Cpath d='M40 14c-8 6-8 12 0 18s8 12 0 18' stroke='%232F6FDB' stroke-width='5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
 <style>
+  /* ============ tokens ============ */
   :root{
-    --navy:#0B2233;
-    --navy-2:#123249;
-    --ink:#0E2233;
-    --ink-soft:#5A6B78;
-    --paper:#FFFFFF;
-    --paper-2:#F5F9FB;
-    --line:rgba(14,34,51,.10);
-    --line-dark:rgba(255,255,255,.12);
+    --ink:#EAF3F8;
+    --ink-soft:#9DB4C4;
+    --ink-dim:#6E8798;
+    --deep:#06121D;
     --teal:#12A08C;
+    --teal-l:#5FE0C8;
     --blue:#2F6FDB;
-    --purple:#7F5BD6;
-    --orange:#E8791E;
-    --pink:#E5307A;
-    --green:#2FAA4A;
-    --sky:#2FA3D1;
+    --blue-l:#7FB2FF;
+    --line:rgba(255,255,255,.13);
+    --line-2:rgba(255,255,255,.07);
+    --glass:rgba(255,255,255,.055);
+    --glass-2:rgba(255,255,255,.085);
     --radius:16px;
-    --max:1180px;
+    --max:1240px;
+    --nav-h:66px;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *{animation:none!important;transition:none!important}}
+  html{
+    scroll-behavior:smooth;
+    scroll-snap-type:y proximity;
+    scroll-padding-top:var(--nav-h);
+    background:var(--deep);
+  }
   body{
-    margin:0; background:var(--paper); color:var(--ink);
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(1200px 700px at 12% -6%, rgba(47,111,219,.20), transparent 60%),
+      radial-gradient(1000px 640px at 92% 8%, rgba(18,160,140,.16), transparent 62%),
+      linear-gradient(180deg,#06121D 0%,#07192A 38%,#0A2135 68%,#06121D 100%);
+    background-attachment:fixed;
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",sans-serif;
-    line-height:1.75; -webkit-font-smoothing:antialiased;
+    line-height:1.72; -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
   a{color:inherit}
   img{max-width:100%; height:auto}
-  .wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,40px)}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4.5vw,48px)}
+  :focus-visible{outline:2px solid var(--teal-l); outline-offset:3px; border-radius:6px}
 
-  /* ---------- nav ---------- */
+  /* ============ 顶部进度条（纯 CSS 滚动驱动） ============ */
+  .progress{
+    position:fixed; top:0; left:0; right:0; height:2px; z-index:60;
+    background:linear-gradient(90deg,var(--teal-l),var(--blue-l),#B49BFF);
+    transform:scaleX(0); transform-origin:0 50%;
+  }
+  @supports (animation-timeline: scroll()){
+    .progress{animation:bar linear both; animation-timeline:scroll(root block)}
+    @keyframes bar{from{transform:scaleX(0)} to{transform:scaleX(1)}}
+  }
+
+  /* ============ nav ============ */
   .nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(11,34,51,.86);
-    backdrop-filter:saturate(140%) blur(10px);
-    border-bottom:1px solid var(--line-dark);
+    position:fixed; top:0; left:0; right:0; z-index:50; height:var(--nav-h);
+    background:rgba(6,18,29,.72); backdrop-filter:saturate(150%) blur(14px);
+    border-bottom:1px solid var(--line-2);
   }
-  .nav-in{display:flex; align-items:center; gap:18px; height:64px}
-  .nav-brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff; font-weight:600; letter-spacing:.06em}
+  .nav-in{display:flex; align-items:center; gap:20px; height:var(--nav-h)}
+  .nav-brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:#fff}
   .nav-brand img{height:30px; width:auto; border-radius:6px}
-  .nav-brand small{display:block; font-size:10px; letter-spacing:.2em; color:rgba(255,255,255,.55); font-weight:400}
-  .nav-links{margin-left:auto; display:flex; gap:26px; overflow-x:auto; scrollbar-width:none}
-  .nav-links::-webkit-scrollbar{display:none}
+  .nav-brand b{font-weight:600; font-size:15px; letter-spacing:.1em; display:block; line-height:1.2}
+  .nav-brand small{display:block; font-size:9px; letter-spacing:.2em; color:var(--ink-dim)}
+  .nav-links{margin-left:auto; display:flex; gap:28px; align-items:center}
   .nav-links a{
-    color:rgba(255,255,255,.78); text-decoration:none; font-size:14px; white-space:nowrap;
-    padding:6px 0; border-bottom:1px solid transparent;
+    color:var(--ink-soft); text-decoration:none; font-size:13.5px; white-space:nowrap;
+    padding:4px 0; border-bottom:1px solid transparent; transition:color .2s,border-color .2s;
   }
-  .nav-links a:hover{color:#fff; border-color:var(--teal)}
+  .nav-links a:hover{color:#fff; border-color:var(--teal-l)}
   .nav-tel{
-    margin-left:8px; white-space:nowrap; text-decoration:none; font-size:13px;
-    color:#0B2233; background:linear-gradient(120deg,#5FE0C8,#7FD6A8); font-weight:600;
-    padding:8px 14px; border-radius:999px;
+    text-decoration:none; font-size:12.5px; font-weight:600; color:#06121D;
+    background:linear-gradient(120deg,var(--teal-l),#8FD9F0);
+    padding:8px 15px; border-radius:999px; white-space:nowrap;
   }
+  @media (max-width:900px){ .nav-links{display:none} .nav-tel{margin-left:auto} }
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative; overflow:hidden; color:#fff;
+  /* ============ 屏（整屏 + 吸附） ============ */
+  .screen{
+    position:relative; min-height:100svh;
+    scroll-snap-align:start; scroll-snap-stop:always;
+    display:flex; align-items:center;
+    overflow:hidden; isolation:isolate;
+  }
+  .bg{
+    position:absolute; inset:-6% 0; z-index:-2;
+    background-size:cover; background-position:center;
+    opacity:.62;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0, #000 16%, #000 84%, transparent 100%);
+  }
+  .bg-photo{background-image:url(assets/bg-lab-hero.jpg)}
+  .bg-photo-b{background-image:url(assets/bg-lab-seq.jpg)}
+  .veil{
+    position:absolute; inset:0; z-index:-1;
     background:
-      radial-gradient(900px 520px at 78% -10%, rgba(47,111,219,.42), transparent 62%),
-      radial-gradient(760px 460px at 10% 110%, rgba(18,160,140,.34), transparent 60%),
-      linear-gradient(160deg,#0A1E2E 0%,#0B2233 45%,#123A52 100%);
+      radial-gradient(1000px 620px at 14% 8%, var(--g1,rgba(47,111,219,.30)), transparent 62%),
+      radial-gradient(900px 560px at 88% 92%, var(--g2,rgba(18,160,140,.24)), transparent 60%),
+      linear-gradient(180deg, rgba(6,18,29,.88) 0%, rgba(6,18,29,.58) 42%, rgba(6,18,29,.90) 100%);
   }
-  .hero::after{
-    content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
-    background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(255,255,255,.055) 1px,transparent 1px);
-    background-size:64px 64px;
-    mask-image:radial-gradient(circle at 50% 30%,#000 25%,transparent 78%);
+  .screen-inner{position:relative; z-index:1; width:100%; padding:calc(var(--nav-h) + 34px) 0 56px}
+
+  /* ============ 通用排版 ============ */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px; margin:0 0 16px;
+    font-size:11.5px; letter-spacing:.24em; text-transform:uppercase;
+    color:var(--teal-l); font-weight:600;
   }
-  .hero-in{position:relative; z-index:1; padding:clamp(56px,9vw,108px) 0 clamp(48px,7vw,84px)}
+  .eyebrow::before{content:""; width:26px; height:1px; background:currentColor}
+  h2{margin:0 0 14px; font-size:clamp(24px,3.4vw,38px); line-height:1.26; font-weight:650; letter-spacing:.01em}
+  .lede{margin:0; max-width:54ch; color:var(--ink-soft); font-size:clamp(14px,1.4vw,16px); text-wrap:pretty}
+  .sec-head{margin-bottom:clamp(24px,3.4vw,44px)}
+
+  /* ============ 屏 1 · Hero ============ */
   .hero-brand{display:flex; align-items:center; gap:16px; margin-bottom:26px}
-  .hero-brand img{height:clamp(52px,7vw,72px); width:auto; border-radius:10px; box-shadow:0 12px 40px -18px rgba(0,0,0,.6)}
-  .hero-brand .cn{font-size:clamp(24px,3.6vw,34px); font-weight:650; letter-spacing:.14em; line-height:1.2}
-  .hero-brand .en{font-size:12px; letter-spacing:.28em; color:rgba(255,255,255,.58); margin-top:6px}
+  .hero-brand img{height:clamp(54px,6.4vw,74px); width:auto; border-radius:10px; box-shadow:0 18px 50px -22px rgba(0,0,0,.85)}
+  .hero-brand .cn{font-size:clamp(23px,3.4vw,33px); font-weight:650; letter-spacing:.16em; line-height:1.2; color:#fff}
+  .hero-brand .en{font-size:11px; letter-spacing:.3em; color:var(--ink-dim); margin-top:7px}
   h1{
-    margin:0 0 18px; max-width:20ch;
-    font-size:clamp(28px,5vw,50px); line-height:1.25; font-weight:650; letter-spacing:.02em;
+    margin:0 0 20px; max-width:19ch;
+    font-size:clamp(30px,5.4vw,58px); line-height:1.18; font-weight:650; letter-spacing:.01em;
   }
-  h1 em{font-style:normal; background:linear-gradient(100deg,#5FE0C8,#8FB8FF); -webkit-background-clip:text; background-clip:text; color:transparent}
-  .hero-lede{margin:0 0 30px; max-width:52ch; color:rgba(255,255,255,.76); font-size:clamp(15px,1.6vw,17px)}
+  h1 em{font-style:normal; background:linear-gradient(100deg,var(--teal-l),#9FD4FF 60%,#C9B6FF); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .hero-lede{margin:0 0 32px; max-width:54ch; color:var(--ink-soft); font-size:clamp(15px,1.5vw,17px)}
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:34px}
   .chip{
-    display:inline-flex; align-items:baseline; gap:7px;
-    border:1px solid rgba(255,255,255,.18); border-radius:999px;
-    padding:7px 15px; font-size:13px; color:rgba(255,255,255,.82);
-    background:rgba(255,255,255,.04);
+    display:inline-flex; align-items:baseline; gap:8px;
+    border:1px solid var(--line); border-radius:999px; padding:7px 16px;
+    font-size:12.5px; color:var(--ink-soft); background:var(--glass);
   }
-  .chip b{font-size:17px; color:#fff; font-weight:650}
-  .hero-cta{display:flex; flex-wrap:wrap; gap:12px}
+  .chip b{font-size:18px; color:#fff; font-weight:650}
+  .cta{display:flex; flex-wrap:wrap; gap:12px}
   .btn{
     display:inline-flex; align-items:center; gap:9px; text-decoration:none;
-    padding:13px 22px; border-radius:12px; font-size:15px; font-weight:600;
-    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+    padding:14px 24px; border-radius:12px; font-size:14.5px; font-weight:600;
+    border:1px solid transparent; transition:transform .2s ease, background .2s ease, border-color .2s ease;
   }
-  .btn-primary{background:linear-gradient(120deg,#2F6FDB,#12A08C); color:#fff; box-shadow:0 18px 40px -22px rgba(47,111,219,.9)}
-  .btn-primary:hover{transform:translateY(-1px)}
-  .btn-ghost{border:1px solid rgba(255,255,255,.24); color:#fff}
-  .btn-ghost:hover{background:rgba(255,255,255,.08)}
-  .btn:focus-visible,.nav-tel:focus-visible,.nav-links a:focus-visible,.cat a:focus-visible{outline:2px solid #5FE0C8; outline-offset:3px}
-
-  /* ---------- section shell ---------- */
-  section{padding:clamp(56px,8vw,92px) 0}
-  .sec-head{max-width:64ch; margin-bottom:clamp(28px,4vw,46px)}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px; margin:0 0 14px;
-    font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--teal); font-weight:600;
+  .btn-p{background:linear-gradient(120deg,var(--teal),#1C7FD0); color:#fff; box-shadow:0 20px 44px -24px rgba(18,160,140,.95)}
+  .btn-p:hover{transform:translateY(-2px)}
+  .btn-g{border-color:var(--line); color:var(--ink); background:var(--glass)}
+  .btn-g:hover{background:var(--glass-2); border-color:rgba(255,255,255,.26)}
+  .scroll-hint{
+    position:absolute; left:50%; bottom:26px; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    color:var(--ink-dim); font-size:11px; letter-spacing:.2em; text-decoration:none;
   }
-  .eyebrow::before{content:""; width:22px; height:2px; background:currentColor; display:block}
-  h2{margin:0 0 12px; font-size:clamp(23px,3.2vw,34px); line-height:1.3; font-weight:650; letter-spacing:.01em}
-  .sec-lede{margin:0; color:var(--ink-soft); font-size:clamp(14px,1.5vw,16px)}
+  .scroll-hint svg{animation:bob 2.4s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0); opacity:.5} 50%{transform:translateY(7px); opacity:1}}
 
-  /* ---------- dual engine ---------- */
-  .dual{background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
-  .dual-grid{display:grid; gap:22px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  /* ============ 屏 2 · 双引擎 ============ */
+  .dual{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(330px,1fr))}
   .engine{
-    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px; position:relative; overflow:hidden;
+    position:relative; overflow:hidden;
+    background:linear-gradient(150deg, var(--glass-2), var(--glass));
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; backdrop-filter:blur(8px);
+    transition:transform .3s ease, border-color .3s ease;
   }
-  .engine::before{content:""; position:absolute; inset:0 0 auto; height:4px; background:var(--c)}
-  .engine h3{margin:6px 0 4px; font-size:21px; font-weight:650}
-  .engine .en{font-size:11px; letter-spacing:.2em; color:var(--ink-soft); text-transform:uppercase}
-  .engine p{margin:14px 0 18px; color:var(--ink-soft); font-size:14px}
-  .engine ul{list-style:none; margin:0; padding:0; display:grid; gap:10px; grid-template-columns:1fr 1fr}
-  .engine li{
-    border:1px solid var(--line); border-radius:10px; padding:11px 13px;
-    background:color-mix(in srgb,var(--c) 5%,#fff);
-  }
-  .engine li b{display:block; font-size:14px; font-weight:600}
-  .engine li span{font-size:12px; color:var(--ink-soft); line-height:1.5; display:block; margin-top:3px}
-  @media (max-width:520px){.engine ul{grid-template-columns:1fr}}
+  .engine:hover{transform:translateY(-4px); border-color:rgba(255,255,255,.26)}
+  .engine::before{content:""; position:absolute; inset:0 0 auto; height:3px; background:linear-gradient(90deg,var(--c),transparent)}
+  .engine .en{font-size:10.5px; letter-spacing:.22em; color:var(--ink-dim); text-transform:uppercase}
+  .engine h3{margin:8px 0 4px; font-size:23px; font-weight:650; color:#fff}
+  .engine>p{margin:12px 0 20px; color:var(--ink-soft); font-size:13.5px}
+  .engine ul{list-style:none; margin:0; padding:0; display:grid; gap:11px; grid-template-columns:1fr 1fr}
+  .engine li{border:1px solid var(--line-2); border-radius:10px; padding:12px 13px; background:rgba(255,255,255,.035)}
+  .engine li b{display:block; font-size:14px; font-weight:600; color:#fff}
+  .engine li span{display:block; margin-top:3px; font-size:11.5px; color:var(--ink-dim); line-height:1.5}
+  @media (max-width:560px){ .engine ul{grid-template-columns:1fr} }
 
-  /* ---------- promo ---------- */
-  .promo-wrap{padding:0 0 8px}
-  .promo{
-    display:flex; flex-wrap:wrap; align-items:center; gap:14px 20px;
-    border:1px solid rgba(232,121,30,.28); background:linear-gradient(100deg,#FFF7EF,#FFFDFB);
-    border-radius:14px; padding:16px 20px;
+  /* ============ 屏 3 · 平台总览 ============ */
+  .grid9{display:grid; gap:14px; grid-template-columns:repeat(3,1fr)}
+  .pcard{
+    position:relative; overflow:hidden;
+    background:linear-gradient(150deg,var(--glass-2),var(--glass));
+    border:1px solid var(--line); border-radius:14px; padding:20px 20px 18px;
+    backdrop-filter:blur(6px);
+    transition:transform .28s ease, border-color .28s ease, background .28s ease;
   }
-  .promo .tag{
-    font-size:12px; font-weight:700; letter-spacing:.06em; color:#B85A0B;
-    background:#FDE9D6; border-radius:8px; padding:4px 10px; white-space:nowrap;
+  .pcard:hover{transform:translateY(-3px); border-color:rgba(255,255,255,.28)}
+  .pcard::before{content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:var(--c)}
+  .pcard .t{display:flex; align-items:baseline; gap:9px; margin-bottom:6px}
+  .pcard h3{margin:0; font-size:16.5px; font-weight:650; color:#fff}
+  .pcard .en{font-size:9.5px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase}
+  .pcard .n{
+    margin-left:auto; font-size:10.5px; font-weight:600; color:#06121D;
+    background:var(--c); border-radius:999px; padding:1px 9px; white-space:nowrap;
   }
-  .promo p{margin:0; font-size:14px; color:#5B3A18}
-  .promo a{margin-left:auto; font-weight:650; color:#B85A0B; text-decoration:none; border-bottom:1px solid rgba(184,90,11,.35); white-space:nowrap}
-  .promo a:hover{border-color:#B85A0B}
+  .pcard p{margin:0 0 10px; font-size:12.5px; color:var(--ink-soft); line-height:1.6}
+  .pcard .sample{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px}
+  .pcard .sample li{
+    font-size:11px; color:var(--ink-dim); border:1px solid var(--line-2);
+    border-radius:6px; padding:2px 8px; background:rgba(255,255,255,.03);
+  }
+  @media (max-width:900px){ .grid9{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:560px){ .grid9{grid-template-columns:1fr} }
 
-  /* ---------- platform matrix ---------- */
-  .matrix{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+  /* ============ 屏 4-6 · 产品明细 ============ */
+  .line-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); align-items:start}
   .cat{
-    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
-    padding:22px 22px 8px; position:relative;
-    transition:box-shadow .2s ease, transform .2s ease;
+    background:linear-gradient(155deg,var(--glass-2),var(--glass));
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:20px 22px 14px; backdrop-filter:blur(6px);
   }
-  .cat:hover{transform:translateY(-2px); box-shadow:0 26px 50px -34px rgba(14,34,51,.55)}
-  .cat::before{content:""; position:absolute; inset:0 0 auto; height:4px; border-radius:var(--radius) var(--radius) 0 0; background:var(--c)}
-  .cat-head{display:flex; align-items:baseline; gap:10px; padding-bottom:12px; border-bottom:1px solid var(--line)}
-  .cat-head h3{margin:0; font-size:18px; font-weight:650}
-  .cat-head .en{font-size:10px; letter-spacing:.18em; color:var(--ink-soft); text-transform:uppercase}
-  .cat-head .count{
-    margin-left:auto; font-size:11px; font-weight:600; color:#fff;
-    background:var(--c); border-radius:999px; padding:2px 9px; white-space:nowrap;
-  }
-  .cat ol{list-style:none; counter-reset:i; margin:0; padding:6px 0 0}
+  .cat-head{display:flex; align-items:baseline; gap:9px; padding-bottom:11px; border-bottom:1px solid var(--line-2)}
+  .cat-head h3{margin:0; font-size:16.5px; font-weight:650; color:#fff}
+  .cat-head .en{font-size:9.5px; letter-spacing:.16em; color:var(--ink-dim); text-transform:uppercase}
+  .cat-head .count{margin-left:auto; font-size:10.5px; font-weight:600; color:#06121D; background:var(--c); border-radius:999px; padding:1px 9px; white-space:nowrap}
+  .cat ol{list-style:none; counter-reset:i; margin:0; padding:4px 0 0}
   .cat li{
-    counter-increment:i; display:grid; grid-template-columns:22px 1fr; gap:10px;
-    padding:11px 0; border-bottom:1px dashed rgba(14,34,51,.08); align-items:start;
+    counter-increment:i; display:grid; grid-template-columns:20px 1fr; gap:9px;
+    padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.07); align-items:start;
   }
   .cat li:last-child{border-bottom:0}
   .cat li::before{
-    content:counter(i); font-size:11px; font-weight:700; color:var(--c);
-    background:color-mix(in srgb,var(--c) 12%,#fff);
-    border-radius:6px; text-align:center; line-height:20px; height:20px;
+    content:counter(i); font-size:10px; font-weight:700; color:#fff;
+    background:color-mix(in srgb,var(--c) 62%, #0A1D2C);
+    border-radius:5px; text-align:center; line-height:18px; height:18px;
   }
-  .cat b{display:block; font-size:14.5px; font-weight:600; line-height:1.5}
-  .cat span.d{display:block; font-size:12.5px; color:var(--ink-soft); line-height:1.55; margin-top:2px}
-  .cat-note{margin:18px 0 10px; font-size:13px; color:var(--ink-soft)}
-  .cat-note a{color:var(--blue); text-decoration:none; border-bottom:1px solid rgba(47,111,219,.35)}
+  .cat b{display:block; font-size:13.5px; font-weight:600; color:#EAF3F8; line-height:1.45}
+  .cat .d{display:block; font-size:11.5px; color:var(--ink-dim); line-height:1.5; margin-top:1px}
 
-  /* ---------- strengths ---------- */
-  .strengths{background:var(--navy); color:#fff; position:relative; overflow:hidden}
-  .strengths::before{
-    content:""; position:absolute; inset:0; opacity:.35; pointer-events:none;
-    background:radial-gradient(700px 380px at 88% 0%, rgba(47,111,219,.45), transparent 62%),
-               radial-gradient(600px 340px at 0% 100%, rgba(18,160,140,.4), transparent 60%);
+  /* ============ 活动条 ============ */
+  .promo{
+    display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
+    border:1px solid rgba(232,121,30,.34); border-radius:13px; padding:14px 20px;
+    background:linear-gradient(100deg,rgba(232,121,30,.14),rgba(232,121,30,.04));
   }
-  .strengths .wrap{position:relative; z-index:1}
-  .strengths h2{color:#fff}
-  .strengths .sec-lede{color:rgba(255,255,255,.7)}
-  .s-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+  .promo .tag{font-size:11.5px; font-weight:700; letter-spacing:.06em; color:#FFC98A; background:rgba(232,121,30,.2); border-radius:7px; padding:3px 10px; white-space:nowrap}
+  .promo p{margin:0; font-size:13.5px; color:#F0DCC6}
+  .promo a{margin-left:auto; font-weight:600; color:#FFC98A; text-decoration:none; border-bottom:1px solid rgba(255,201,138,.4); white-space:nowrap}
+  .promo a:hover{border-color:#FFC98A}
+
+  /* ============ 屏 7 · 优势 ============ */
+  .s-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
   .s-item{
-    border:1px solid var(--line-dark); border-radius:14px; padding:20px;
-    background:rgba(255,255,255,.04);
+    border:1px solid var(--line); border-radius:14px; padding:22px;
+    background:linear-gradient(150deg,var(--glass-2),var(--glass)); backdrop-filter:blur(6px);
+    transition:transform .28s ease, border-color .28s ease;
   }
-  .s-item svg{width:26px; height:26px; stroke:#5FE0C8; fill:none; stroke-width:1.7; margin-bottom:12px}
-  .s-item h3{margin:0 0 6px; font-size:15.5px; font-weight:600}
-  .s-item p{margin:0; font-size:13.5px; color:rgba(255,255,255,.66)}
+  .s-item:hover{transform:translateY(-3px); border-color:rgba(255,255,255,.26)}
+  .s-item svg{width:26px; height:26px; stroke:var(--teal-l); fill:none; stroke-width:1.7; margin-bottom:13px}
+  .s-item h3{margin:0 0 7px; font-size:15.5px; font-weight:600; color:#fff}
+  .s-item p{margin:0; font-size:13px; color:var(--ink-soft)}
 
-  /* ---------- contact ---------- */
-  .contact-grid{display:grid; gap:24px; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); align-items:start}
-  .c-list{list-style:none; margin:26px 0 0; padding:0; display:grid; gap:14px}
-  .c-list li{display:flex; gap:14px; align-items:flex-start}
-  .c-list svg{width:20px; height:20px; stroke:var(--teal); fill:none; stroke-width:1.8; flex:none; margin-top:3px}
-  .c-list b{display:block; font-size:13px; color:var(--ink-soft); font-weight:500; letter-spacing:.04em}
-  .c-list a,.c-list span.v{font-size:19px; font-weight:650; text-decoration:none; color:var(--ink)}
-  .c-list a:hover{color:var(--blue)}
+  /* ============ 屏 8 · 联系 ============ */
+  .contact-grid{display:grid; gap:26px; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); align-items:center}
+  .c-list{list-style:none; margin:28px 0 0; padding:0; display:grid; gap:16px}
+  .c-list li{display:flex; gap:15px; align-items:flex-start}
+  .c-list svg{width:21px; height:21px; stroke:var(--teal-l); fill:none; stroke-width:1.8; flex:none; margin-top:3px}
+  .c-list b{display:block; font-size:12px; color:var(--ink-dim); font-weight:500; letter-spacing:.06em}
+  .c-list a,.c-list .v{font-size:20px; font-weight:650; color:#fff; text-decoration:none}
+  .c-list a:hover{color:var(--teal-l)}
   .qr-box{
-    background:var(--paper-2); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px; text-align:center;
+    background:linear-gradient(150deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+    border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px; text-align:center; backdrop-filter:blur(8px);
   }
-  .qr-box img{
-    width:100%; max-width:220px; height:auto; aspect-ratio:1/1;
-    border-radius:10px; display:block; margin:0 auto 14px;
-    object-fit:contain;
-  }
-  .qr-box b{display:block; font-size:15px; margin-bottom:4px}
-  .qr-box span{font-size:13px; color:var(--ink-soft)}
+  .qr-box img{width:100%; max-width:210px; height:auto; aspect-ratio:1/1; object-fit:contain; border-radius:10px; display:block; margin:0 auto 15px; background:#fff; padding:8px}
+  .qr-box b{display:block; font-size:15.5px; color:#fff; margin-bottom:5px}
+  .qr-box span{font-size:12.5px; color:var(--ink-dim)}
+  @media (max-width:860px){ .contact-grid{grid-template-columns:1fr} }
 
-  /* ---------- footer ---------- */
-  footer{background:var(--navy); color:rgba(255,255,255,.62); padding:34px 0; font-size:13px}
-  .f-in{display:flex; flex-wrap:wrap; gap:12px 28px; justify-content:space-between; align-items:center}
-  .f-in .slogan{color:rgba(255,255,255,.82); letter-spacing:.04em}
-  .f-in a{color:rgba(255,255,255,.62); text-decoration:none; border-bottom:1px solid rgba(255,255,255,.22)}
+  /* ============ 页脚 ============ */
+  .foot{
+    position:relative; z-index:1;
+    border-top:1px solid var(--line-2); padding:26px 0 30px;
+    background:rgba(6,18,29,.55);
+  }
+  .f-in{display:flex; flex-wrap:wrap; gap:10px 26px; justify-content:space-between; align-items:center; font-size:12.5px; color:var(--ink-dim)}
+  .f-in .slogan{color:var(--ink-soft); letter-spacing:.04em}
+  .f-in a{color:var(--ink-dim); text-decoration:none; border-bottom:1px solid var(--line-2)}
   .f-in a:hover{color:#fff}
 
-  @media (max-width:760px){
-    .contact-grid{grid-template-columns:1fr}
-    .nav-links{display:none}
-    .nav-tel{margin-left:auto}
-    .promo a{margin-left:0}
+  /* ============ 滚动驱动动效（渐进增强，不支持则静态） ============ */
+  @supports (animation-timeline: view()){
+    .screen .bg{
+      animation:drift linear both;
+      animation-timeline:view();
+      animation-range:cover 0% cover 100%;
+    }
+    @keyframes drift{
+      from{transform:translateY(-3.5%) scale(1.06)}
+      to{transform:translateY(3.5%) scale(1.01)}
+    }
+    .reveal{
+      animation:rise linear both;
+      animation-timeline:view();
+      animation-range:entry 8% entry 72%;
+    }
+    @keyframes rise{
+      from{opacity:0; transform:translateY(38px); filter:blur(5px)}
+      to{opacity:1; transform:none; filter:blur(0)}
+    }
+    .reveal-2{animation-range:entry 14% entry 82%}
+    .reveal-3{animation-range:entry 20% entry 92%}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *{animation:none !important; transition:none !important}
+    .reveal{opacity:1 !important; transform:none !important; filter:none !important}
+  }
+  @media (max-width:900px){
+    html{scroll-snap-type:none}
+    .screen{min-height:auto; padding:0}
+    .screen-inner{padding:calc(var(--nav-h) + 48px) 0 60px}
   }
 </style>
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"></div>
+
 <nav class="nav">
   <div class="wrap nav-in">
     <a class="nav-brand" href="#top">
       <img src="assets/logo.jpg" alt="瑞研达生物" width="600" height="767">
-      <span>瑞研达生物<small>RUIYANDA BIOTECHNOLOGY</small></span>
+      <span><b>瑞研达生物</b><small>RUIYANDA BIOTECHNOLOGY</small></span>
     </a>
     <div class="nav-links">
-      <a href="#platform">产品平台</a>
-      <a href="#matrix">全产品线</a>
+      <a href="#platform">平台总览</a>
+      <a href="#line1">全产品线</a>
       <a href="#strength">服务优势</a>
       <a href="#contact">联系我们</a>
     </div>
@@ -264,263 +340,372 @@
   </div>
 </nav>
 
-<header class="hero" id="top">
-  <div class="wrap hero-in">
-    <div class="hero-brand">
-      <img src="assets/logo.jpg" alt="" width="600" height="767">
-      <div>
-        <div class="cn">瑞研达生物</div>
-        <div class="en">RUIYANDA BIOTECHNOLOGY</div>
+<!-- ========== 屏 1 · 首屏 ========== -->
+<header class="screen" id="top">
+  <div class="bg bg-photo" aria-hidden="true"></div>
+  <div class="veil" style="--g1:rgba(47,111,219,.34);--g2:rgba(18,160,140,.28)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="hero-brand reveal">
+        <img src="assets/logo.jpg" alt="" width="600" height="767">
+        <div>
+          <div class="cn">瑞研达生物</div>
+          <div class="en">RUIYANDA BIOTECHNOLOGY</div>
+        </div>
+      </div>
+      <h1 class="reveal reveal-2">多组学 · 一站式 · <em>精准科研服务</em></h1>
+      <p class="hero-lede reveal reveal-3">
+        从表观调控到翻译表达，从蛋白代谢到微生物基因组，覆盖科研全流程。
+        以表观为钥、以翻译为核，九大组学平台与个性化生信分析，为您的课题提供从方案设计到数据交付的完整支持。
+      </p>
+      <div class="chips reveal reveal-3">
+        <span class="chip"><b>9</b> 大组学平台</span>
+        <span class="chip"><b>52</b> 项科研服务</span>
+        <span class="chip"><b>1</b> 站式方案设计与生信分析</span>
+      </div>
+      <div class="cta reveal reveal-3">
+        <a class="btn btn-p" href="tel:+8617681762580">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          咨询方案与报价
+        </a>
+        <a class="btn btn-g" href="#platform">浏览九大平台</a>
       </div>
     </div>
-    <h1>多组学 · 一站式 · <em>精准科研服务</em></h1>
-    <p class="hero-lede">
-      从表观调控到翻译表达，从蛋白代谢到微生物基因组，覆盖科研全流程。
-      以表观为钥、以翻译为核，九大组学平台与个性化生信分析，为您的课题提供从方案设计到数据交付的完整支持。
-    </p>
-    <div class="chips">
-      <span class="chip"><b>9</b> 大组学平台</span>
-      <span class="chip"><b>52</b> 项科研服务</span>
-      <span class="chip"><b>1</b> 站式方案设计与生信分析</span>
-    </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="tel:+8617681762580">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
-        咨询方案与报价
-      </a>
-      <a class="btn btn-ghost" href="#matrix">查看全产品线</a>
-    </div>
   </div>
+  <a class="scroll-hint" href="#engine" aria-label="向下滚动">
+    <span>SCROLL</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+  </a>
 </header>
 
-<section id="platform">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Core Platforms</p>
-      <h2>核心产品线：表观组学 × 翻译组学 双引擎驱动</h2>
-      <p class="sec-lede">解码基因表达调控的核心环节，贯通「表观」与「翻译」全链条科研服务。</p>
-    </div>
-    <div class="dual-grid">
-      <article class="engine" style="--c:#12A08C">
-        <span class="en">Epigenomics</span>
-        <h3>表观组学</h3>
-        <p>染色质状态 · 转录因子结合 · 基因表达调控机制</p>
-        <ul>
-          <li><b>CUT&amp;Tag</b><span>靶向染色质蛋白定位，低起始量、信噪比高</span></li>
-          <li><b>ATAC-seq</b><span>染色质开放性检测，支持单细胞 / 微量样本</span></li>
-          <li><b>FOODIE</b><span>转录因子结合位点解析，精确锁定调控元件</span></li>
-          <li><b>Hi-C</b><span>三维基因组构象捕获，解析空间互作网络</span></li>
-        </ul>
-      </article>
-      <article class="engine" style="--c:#2F6FDB">
-        <span class="en">Translatomics</span>
-        <h3>翻译组学</h3>
-        <p>聚焦翻译调控，覆盖基因表达全链条</p>
-        <ul>
-          <li><b>核糖体印迹分析</b><span>超高分辨率 Ribo-seq / 低起始量微量样本</span></li>
-          <li><b>翻译碰撞检测</b><span>Disome-seq 解析核糖体碰撞与翻译停滞</span></li>
-          <li><b>多聚核糖体图谱分析</b><span>Polysome Profiling / Polysome-seq / RNC-seq</span></li>
-          <li><b>三代翻译组测序</b><span>异构体水平解析翻译调控 isoRNC / isoPolysome-seq</span></li>
-        </ul>
-      </article>
-    </div>
-  </div>
-</section>
-
-<div class="wrap promo-wrap">
-  <div class="promo">
-    <span class="tag">限时活动</span>
-    <p>表观组学热门项目特惠：ATAC-seq、CUT&amp;Tag 限时活动，详情请咨询 <strong>176-8176-2580</strong>（微信同号）</p>
-    <a href="#contact">获取报价 →</a>
-  </div>
-</div>
-
-<section id="matrix">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Full Product Line</p>
-      <h2>九大组学平台 · 52 项科研服务</h2>
-      <p class="sec-lede">低起始量 / 微量珍贵样本方案可定制，全流程质控保障。</p>
-    </div>
-
-    <div class="matrix">
-
-      <article class="cat" style="--c:#12A08C">
-        <div class="cat-head"><h3>表观组学</h3><span class="en">Epigenomics</span><span class="count">9 项</span></div>
-        <ol>
-          <li><div><b>m⁶A 甲基化测序</b><span class="d">GLORI-seq / MeRIP-seq</span></div></li>
-          <li><div><b>DNA 甲基化测序</b><span class="d">WGBS / 目标区域甲基化</span></div></li>
-          <li><div><b>ChIP-seq</b><span class="d">蛋白-DNA 互作全景解析</span></div></li>
-          <li><div><b>ATAC-seq</b><span class="d">染色质开放性检测</span></div></li>
-          <li><div><b>CUT&amp;Tag</b><span class="d">靶向染色质定位，低起始量</span></div></li>
-          <li><div><b>RIP-seq</b><span class="d">RNA 结合蛋白靶标解析</span></div></li>
-          <li><div><b>Bulk TCR/BCR</b><span class="d">免疫组库多样性分析</span></div></li>
-          <li><div><b>FOODIE</b><span class="d">转录因子结合位点解析</span></div></li>
-          <li><div><b>Hi-C</b><span class="d">三维基因组构象捕获</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#2F6FDB">
-        <div class="cat-head"><h3>翻译组学</h3><span class="en">Translatomics</span><span class="count">7 项</span></div>
-        <ol>
-          <li><div><b>核糖体印迹分析</b><span class="d">超高分辨率 Ribo-seq / 低起始量</span></div></li>
-          <li><div><b>翻译碰撞检测</b><span class="d">Disome-seq</span></div></li>
-          <li><div><b>多聚核糖体图谱分析</b><span class="d">Polysome Profiling / Polysome-seq / RNC-seq</span></div></li>
-          <li><div><b>三代翻译组测序</b><span class="d">isoRNC-seq / isoPolysome-seq</span></div></li>
-          <li><div><b>tRNA 测序</b><span class="d">全长 tRNA-seq / Charged tRNA-seq / tsRNA/tRF-seq</span></div></li>
-          <li><div><b>Poly(A) 尾测序</b><span class="d">PALso-seq / TAIL iso-seq</span></div></li>
-          <li><div><b>翻译多组学联合分析</b><span class="d">小肽 / 微肽挖掘 / 肿瘤新抗原发现</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#7F5BD6">
-        <div class="cat-head"><h3>转录调控组学</h3><span class="en">Transcriptomics</span><span class="count">3 项</span></div>
-        <ol>
-          <li><div><b>转录组测序</b><span class="d">mRNA 表达谱定量分析</span></div></li>
-          <li><div><b>全转录组测序</b><span class="d">mRNA / lncRNA / circRNA / miRNA</span></div></li>
-          <li><div><b>微量全转录组测序</b><span class="d">FFPE / 外泌体 / 血浆 / 细胞上清等</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#E8791E">
-        <div class="cat-head"><h3>蛋白组学</h3><span class="en">Proteomics</span><span class="count">5 项</span></div>
-        <ol>
-          <li><div><b>TMT 标记定量蛋白质组学</b><span class="d">多重标记定量，多组样本比较</span></div></li>
-          <li><div><b>LabelFree / 4D-LabelFree</b><span class="d">无标记定量，深度覆盖蛋白组</span></div></li>
-          <li><div><b>DIA / 4D-DIA / Astral-DIA</b><span class="d">数据非依赖采集，高稳定性定量</span></div></li>
-          <li><div><b>修饰蛋白质组学</b><span class="d">磷酸化 / 乙酰化 / 泛素化等</span></div></li>
-          <li><div><b>Olink 蛋白质组学</b><span class="d">邻近延伸技术，超高灵敏度</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#E5307A">
-        <div class="cat-head"><h3>代谢组学</h3><span class="en">Metabolomics</span><span class="count">6 项</span></div>
-        <ol>
-          <li><div><b>非靶代谢组</b><span class="d">全谱代谢物筛查</span></div></li>
-          <li><div><b>脂质代谢组</b><span class="d">脂质分子全谱解析</span></div></li>
-          <li><div><b>定量脂质组</b><span class="d">关键脂质精确定量</span></div></li>
-          <li><div><b>高通量靶向代谢组</b><span class="d">目标代谢物精确定量</span></div></li>
-          <li><div><b>中药代谢组</b><span class="d">中药成分与体内代谢</span></div></li>
-          <li><div><b>顶空 GCMS 代谢组学</b><span class="d">挥发性代谢物分析</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#2FAA4A">
-        <div class="cat-head"><h3>微生物组学</h3><span class="en">Microbiomics</span><span class="count">5 项</span></div>
-        <ol>
-          <li><div><b>肿瘤内微生物测序</b><span class="d">肿瘤微环境微生物组解析</span></div></li>
-          <li><div><b>宏基因组测序</b><span class="d">全群落功能与物种组成</span></div></li>
-          <li><div><b>微生物群落多样性</b><span class="d">16S / ITS 测序</span></div></li>
-          <li><div><b>全长 16S rDNA 测序</b><span class="d">种水平高分辨分类鉴定</span></div></li>
-          <li><div><b>单菌基因组和原核转录组</b><span class="d">基因组组装与表达调控</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#2FA3D1">
-        <div class="cat-head"><h3>基因组学</h3><span class="en">Genomics</span><span class="count">2 项</span></div>
-        <ol>
-          <li><div><b>外显子组测序</b><span class="d">外显子区域高效捕获，疾病变异筛查</span></div></li>
-          <li><div><b>基因组重测序</b><span class="d">全基因组变异检测，群体遗传分析</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#0E9AA7">
-        <div class="cat-head"><h3>单细胞测序</h3><span class="en">Single Cell</span><span class="count">8 项</span></div>
-        <ol>
-          <li><div><b>10x 单细胞 3' 转录组</b><span class="d">高通量单细胞表达谱</span></div></li>
-          <li><div><b>10x 单细胞 5' 免疫组</b><span class="d">免疫受体库与克隆型分析</span></div></li>
-          <li><div><b>10x 单细胞 ATAC</b><span class="d">单细胞染色质可及性</span></div></li>
-          <li><div><b>10x Flex 单细胞转录组</b><span class="d">探针捕获，兼容 FFPE 样本</span></div></li>
-          <li><div><b>墨卓单细胞转录组</b><span class="d">国产高通量平台方案</span></div></li>
-          <li><div><b>华大单细胞测序 C4</b><span class="d">高通量单细胞 RNA 测序</span></div></li>
-          <li><div><b>BD 单细胞转录组/免疫组</b><span class="d">微孔板单细胞方案</span></div></li>
-          <li><div><b>BD 单细胞蛋白组学</b><span class="d">单细胞水平蛋白标志物检测</span></div></li>
-        </ol>
-      </article>
-
-      <article class="cat" style="--c:#8A6DDB">
-        <div class="cat-head"><h3>空间与原位组学</h3><span class="en">Spatial &amp; In Situ</span><span class="count">7 项</span></div>
-        <ol>
-          <li><div><b>空间转录组学</b><span class="d">10x cytAssist</span></div></li>
-          <li><div><b>高清空间转录组</b><span class="d">10x Visium HD</span></div></li>
-          <li><div><b>空间原位转录组学</b><span class="d">10x Xenium</span></div></li>
-          <li><div><b>华大时空转录组</b><span class="d">Stereo-seq</span></div></li>
-          <li><div><b>华大时空蛋白组</b><span class="d">Stereo CITE-seq</span></div></li>
-          <li><div><b>空间单细胞蛋白质组学 PCF</b><span class="d">CODEX</span></div></li>
-          <li><div><b>空间代谢组</b><span class="d">组织原位代谢物空间分布</span></div></li>
-        </ol>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<section class="strengths" id="strength">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">Why Us</p>
-      <h2>我们的服务优势</h2>
-      <p class="sec-lede">从样本接收到数据交付，全流程可追溯，方案按课题定制。</p>
-    </div>
-    <div class="s-grid">
-      <div class="s-item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-        <h3>全流程严格质控</h3>
-        <p>交付周期短、稳定性高，关键节点可追溯。</p>
+<!-- ========== 屏 2 · 核心双引擎 ========== -->
+<section class="screen" id="engine">
+  <div class="bg bg-photo-b" aria-hidden="true"></div>
+  <div class="veil" style="--g1:rgba(18,160,140,.32);--g2:rgba(47,111,219,.30)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Core Platforms</p>
+        <h2>核心产品线：表观组学 × 翻译组学 双引擎驱动</h2>
+        <p class="lede">解码基因表达调控的核心环节，贯通「表观」与「翻译」全链条科研服务。</p>
       </div>
-      <div class="s-item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M5.5 6.5l4 4M18.5 6.5l-4 4"/><ellipse cx="12" cy="16" rx="7" ry="4"/></svg>
-        <h3>样本兼容广</h3>
-        <p>组织 / 细胞 / 临床样本 / 微量珍贵样本均可承接。</p>
-      </div>
-      <div class="s-item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 3 3 5-6 5 4"/><path d="M3 21h18"/></svg>
-        <h3>个性化生信分析</h3>
-        <p>按课题需求定制分析路径，提供售后技术支持。</p>
-      </div>
-      <div class="s-item">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9.5 9.5l5 5"/></svg>
-        <h3>多组学联合方案</h3>
-        <p>从表观到翻译的联合设计，一次取样回答多层问题。</p>
+      <div class="dual">
+        <article class="engine reveal reveal-2" style="--c:#12A08C">
+          <span class="en">Epigenomics</span>
+          <h3>表观组学</h3>
+          <p>染色质状态 · 转录因子结合 · 基因表达调控机制</p>
+          <ul>
+            <li><b>CUT&amp;Tag</b><span>靶向染色质蛋白定位，低起始量、信噪比高</span></li>
+            <li><b>ATAC-seq</b><span>染色质开放性检测，支持单细胞 / 微量样本</span></li>
+            <li><b>FOODIE</b><span>转录因子结合位点解析，精确锁定调控元件</span></li>
+            <li><b>Hi-C</b><span>三维基因组构象捕获，解析空间互作网络</span></li>
+          </ul>
+        </article>
+        <article class="engine reveal reveal-3" style="--c:#2F6FDB">
+          <span class="en">Translatomics</span>
+          <h3>翻译组学</h3>
+          <p>聚焦翻译调控，覆盖基因表达全链条</p>
+          <ul>
+            <li><b>核糖体印迹分析</b><span>超高分辨率 Ribo-seq / 低起始量微量样本</span></li>
+            <li><b>翻译碰撞检测</b><span>Disome-seq 解析核糖体碰撞与翻译停滞</span></li>
+            <li><b>多聚核糖体图谱</b><span>Polysome Profiling / Polysome-seq / RNC-seq</span></li>
+            <li><b>三代翻译组测序</b><span>异构体水平解析 isoRNC-seq / isoPolysome-seq</span></li>
+          </ul>
+        </article>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div>
-        <div class="sec-head" style="margin-bottom:0">
+<!-- ========== 屏 3 · 九大平台总览 ========== -->
+<section class="screen" id="platform">
+  <div class="bg" aria-hidden="true" style="background-image:radial-gradient(900px 520px at 18% 22%, rgba(18,160,140,.22), transparent 60%),radial-gradient(820px 480px at 86% 78%, rgba(47,111,219,.24), transparent 60%)"></div>
+  <div class="veil" style="--g1:rgba(47,111,219,.24);--g2:rgba(138,109,219,.20)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Nine Platforms</p>
+        <h2>九大组学平台 · 覆盖科研全流程</h2>
+        <p class="lede">从表观调控到翻译表达，从蛋白代谢到微生物与空间组学，一次对接，多维解答。</p>
+      </div>
+      <div class="grid9">
+        <article class="pcard reveal" style="--c:#12A08C">
+          <div class="t"><h3>表观组学</h3><span class="en">Epigenomics</span><span class="n">9 项</span></div>
+          <p>染色质状态、转录因子结合与基因表达调控机制</p>
+          <ul class="sample"><li>ATAC-seq</li><li>CUT&amp;Tag</li><li>FOODIE</li><li>Hi-C</li></ul>
+        </article>
+        <article class="pcard reveal reveal-2" style="--c:#2F6FDB">
+          <div class="t"><h3>翻译组学</h3><span class="en">Translatomics</span><span class="n">7 项</span></div>
+          <p>聚焦翻译调控，覆盖基因表达全链条</p>
+          <ul class="sample"><li>Ribo-seq</li><li>Disome-seq</li><li>tRNA-seq</li><li>Poly(A)</li></ul>
+        </article>
+        <article class="pcard reveal reveal-3" style="--c:#7F5BD6">
+          <div class="t"><h3>转录调控组学</h3><span class="en">Transcriptomics</span><span class="n">3 项</span></div>
+          <p>mRNA / lncRNA / circRNA / miRNA 全谱定量</p>
+          <ul class="sample"><li>转录组</li><li>全转录组</li><li>微量全转录组</li></ul>
+        </article>
+        <article class="pcard reveal" style="--c:#E8791E">
+          <div class="t"><h3>蛋白组学</h3><span class="en">Proteomics</span><span class="n">5 项</span></div>
+          <p>标记与无标记定量、修饰组学与高灵敏检测</p>
+          <ul class="sample"><li>TMT</li><li>DIA</li><li>LabelFree</li><li>Olink</li></ul>
+        </article>
+        <article class="pcard reveal reveal-2" style="--c:#E5307A">
+          <div class="t"><h3>代谢组学</h3><span class="en">Metabolomics</span><span class="n">6 项</span></div>
+          <p>非靶、定量、脂质、中药与挥发性代谢物分析</p>
+          <ul class="sample"><li>非靶代谢组</li><li>定量脂质组</li><li>中药代谢组</li></ul>
+        </article>
+        <article class="pcard reveal reveal-3" style="--c:#2FAA4A">
+          <div class="t"><h3>微生物组学</h3><span class="en">Microbiomics</span><span class="n">5 项</span></div>
+          <p>宏基因组、群落多样性、肿瘤内微生物与单菌测序</p>
+          <ul class="sample"><li>宏基因组</li><li>16S / ITS</li><li>单菌基因组</li></ul>
+        </article>
+        <article class="pcard reveal" style="--c:#2FA3D1">
+          <div class="t"><h3>基因组学</h3><span class="en">Genomics</span><span class="n">2 项</span></div>
+          <p>外显子组与全基因组变异检测</p>
+          <ul class="sample"><li>外显子组测序</li><li>基因组重测序</li></ul>
+        </article>
+        <article class="pcard reveal reveal-2" style="--c:#0E9AA7">
+          <div class="t"><h3>单细胞测序</h3><span class="en">Single Cell</span><span class="n">8 项</span></div>
+          <p>转录组、免疫组、ATAC 与单细胞蛋白组</p>
+          <ul class="sample"><li>10x 3'/5'</li><li>10x ATAC</li><li>华大 C4</li><li>BD</li></ul>
+        </article>
+        <article class="pcard reveal reveal-3" style="--c:#8A6DDB">
+          <div class="t"><h3>空间与原位组学</h3><span class="en">Spatial &amp; In Situ</span><span class="n">7 项</span></div>
+          <p>空间转录组、原位测序与空间蛋白质组</p>
+          <ul class="sample"><li>Visium HD</li><li>Xenium</li><li>Stereo-seq</li><li>CODEX</li></ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 屏 4 · 产品明细 I ========== -->
+<section class="screen" id="line1">
+  <div class="bg" aria-hidden="true" style="background-image:radial-gradient(820px 500px at 80% 12%, rgba(18,160,140,.20), transparent 60%),radial-gradient(760px 460px at 12% 88%, rgba(47,111,219,.22), transparent 60%)"></div>
+  <div class="veil" style="--g1:rgba(18,160,140,.26);--g2:rgba(47,111,219,.24)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Product Line · 01</p>
+        <h2>表观 · 翻译 · 转录调控</h2>
+        <p class="lede">19 项核心服务，覆盖染色质调控与基因表达全链条。</p>
+      </div>
+      <div class="line-grid">
+        <article class="cat reveal" style="--c:#12A08C">
+          <div class="cat-head"><h3>表观组学</h3><span class="en">Epigenomics</span><span class="count">9 项</span></div>
+          <ol>
+            <li><div><b>m⁶A 甲基化测序</b><span class="d">GLORI-seq / MeRIP-seq</span></div></li>
+            <li><div><b>DNA 甲基化测序</b><span class="d">WGBS / 目标区域甲基化</span></div></li>
+            <li><div><b>ChIP-seq</b><span class="d">蛋白-DNA 互作全景解析</span></div></li>
+            <li><div><b>ATAC-seq</b><span class="d">染色质开放性检测</span></div></li>
+            <li><div><b>CUT&amp;Tag</b><span class="d">靶向染色质定位，低起始量</span></div></li>
+            <li><div><b>RIP-seq</b><span class="d">RNA 结合蛋白靶标解析</span></div></li>
+            <li><div><b>Bulk TCR/BCR</b><span class="d">免疫组库多样性分析</span></div></li>
+            <li><div><b>FOODIE</b><span class="d">转录因子结合位点解析</span></div></li>
+            <li><div><b>Hi-C</b><span class="d">三维基因组构象捕获</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal reveal-2" style="--c:#2F6FDB">
+          <div class="cat-head"><h3>翻译组学</h3><span class="en">Translatomics</span><span class="count">7 项</span></div>
+          <ol>
+            <li><div><b>核糖体印迹分析</b><span class="d">超高分辨率 Ribo-seq / 低起始量</span></div></li>
+            <li><div><b>翻译碰撞检测</b><span class="d">Disome-seq</span></div></li>
+            <li><div><b>多聚核糖体图谱分析</b><span class="d">Polysome Profiling / Polysome-seq / RNC-seq</span></div></li>
+            <li><div><b>三代翻译组测序</b><span class="d">isoRNC-seq / isoPolysome-seq</span></div></li>
+            <li><div><b>tRNA 测序</b><span class="d">全长 tRNA-seq / Charged tRNA-seq / tsRNA/tRF-seq</span></div></li>
+            <li><div><b>Poly(A) 尾测序</b><span class="d">PALso-seq / TAIL iso-seq</span></div></li>
+            <li><div><b>翻译多组学联合分析</b><span class="d">小肽 / 微肽挖掘 / 肿瘤新抗原发现</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal reveal-3" style="--c:#7F5BD6">
+          <div class="cat-head"><h3>转录调控组学</h3><span class="en">Transcriptomics</span><span class="count">3 项</span></div>
+          <ol>
+            <li><div><b>转录组测序</b><span class="d">mRNA 表达谱定量分析</span></div></li>
+            <li><div><b>全转录组测序</b><span class="d">mRNA / lncRNA / circRNA / miRNA</span></div></li>
+            <li><div><b>微量全转录组测序</b><span class="d">FFPE / 外泌体 / 血浆 / 细胞上清等</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 屏 5 · 产品明细 II ========== -->
+<section class="screen" id="line2">
+  <div class="bg" aria-hidden="true" style="background-image:radial-gradient(780px 480px at 16% 14%, rgba(232,121,30,.16), transparent 60%),radial-gradient(820px 500px at 88% 86%, rgba(229,48,122,.16), transparent 60%)"></div>
+  <div class="veil" style="--g1:rgba(232,121,30,.18);--g2:rgba(18,160,140,.22)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Product Line · 02</p>
+        <h2>蛋白 · 代谢 · 微生物 · 基因组</h2>
+        <p class="lede">18 项服务，从分子到代谢全景覆盖。</p>
+      </div>
+      <div class="line-grid">
+        <article class="cat reveal" style="--c:#E8791E">
+          <div class="cat-head"><h3>蛋白组学</h3><span class="en">Proteomics</span><span class="count">5 项</span></div>
+          <ol>
+            <li><div><b>TMT 标记定量蛋白质组学</b><span class="d">多重标记定量，多组样本比较</span></div></li>
+            <li><div><b>LabelFree / 4D-LabelFree</b><span class="d">无标记定量，深度覆盖蛋白组</span></div></li>
+            <li><div><b>DIA / 4D-DIA / Astral-DIA</b><span class="d">数据非依赖采集，高稳定性定量</span></div></li>
+            <li><div><b>修饰蛋白质组学</b><span class="d">磷酸化 / 乙酰化 / 泛素化等</span></div></li>
+            <li><div><b>Olink 蛋白质组学</b><span class="d">邻近延伸技术，超高灵敏度</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal reveal-2" style="--c:#E5307A">
+          <div class="cat-head"><h3>代谢组学</h3><span class="en">Metabolomics</span><span class="count">6 项</span></div>
+          <ol>
+            <li><div><b>非靶代谢组</b><span class="d">全谱代谢物筛查</span></div></li>
+            <li><div><b>脂质代谢组</b><span class="d">脂质分子全谱解析</span></div></li>
+            <li><div><b>定量脂质组</b><span class="d">关键脂质精确定量</span></div></li>
+            <li><div><b>高通量靶向代谢组</b><span class="d">目标代谢物精确定量</span></div></li>
+            <li><div><b>中药代谢组</b><span class="d">中药成分与体内代谢</span></div></li>
+            <li><div><b>顶空 GCMS 代谢组学</b><span class="d">挥发性代谢物分析</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal reveal-3" style="--c:#2FAA4A">
+          <div class="cat-head"><h3>微生物组学</h3><span class="en">Microbiomics</span><span class="count">5 项</span></div>
+          <ol>
+            <li><div><b>肿瘤内微生物测序</b><span class="d">肿瘤微环境微生物组解析</span></div></li>
+            <li><div><b>宏基因组测序</b><span class="d">全群落功能与物种组成</span></div></li>
+            <li><div><b>微生物群落多样性</b><span class="d">16S / ITS 测序</span></div></li>
+            <li><div><b>全长 16S rDNA 测序</b><span class="d">种水平高分辨分类鉴定</span></div></li>
+            <li><div><b>单菌基因组和原核转录组</b><span class="d">基因组组装与表达调控</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal" style="--c:#2FA3D1">
+          <div class="cat-head"><h3>基因组学</h3><span class="en">Genomics</span><span class="count">2 项</span></div>
+          <ol>
+            <li><div><b>外显子组测序</b><span class="d">外显子区域高效捕获，疾病变异筛查</span></div></li>
+            <li><div><b>基因组重测序</b><span class="d">全基因组变异检测，群体遗传分析</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 屏 6 · 产品明细 III ========== -->
+<section class="screen" id="line3">
+  <div class="bg bg-photo" aria-hidden="true" style="opacity:.32"></div>
+  <div class="veil" style="--g1:rgba(138,109,219,.26);--g2:rgba(47,111,219,.24)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Product Line · 03</p>
+        <h2>单细胞 · 空间与原位</h2>
+        <p class="lede">15 项前沿服务，把分辨率推进到单细胞与组织原位。</p>
+      </div>
+      <div class="line-grid">
+        <article class="cat reveal" style="--c:#0E9AA7">
+          <div class="cat-head"><h3>单细胞测序</h3><span class="en">Single Cell</span><span class="count">8 项</span></div>
+          <ol>
+            <li><div><b>10x 单细胞 3' 转录组</b><span class="d">高通量单细胞表达谱</span></div></li>
+            <li><div><b>10x 单细胞 5' 免疫组</b><span class="d">免疫受体库与克隆型分析</span></div></li>
+            <li><div><b>10x 单细胞 ATAC</b><span class="d">单细胞染色质可及性</span></div></li>
+            <li><div><b>10x Flex 单细胞转录组</b><span class="d">探针捕获，兼容 FFPE 样本</span></div></li>
+            <li><div><b>墨卓单细胞转录组</b><span class="d">国产高通量平台方案</span></div></li>
+            <li><div><b>华大单细胞测序 C4</b><span class="d">高通量单细胞 RNA 测序</span></div></li>
+            <li><div><b>BD 单细胞转录组/免疫组</b><span class="d">微孔板单细胞方案</span></div></li>
+            <li><div><b>BD 单细胞蛋白组学</b><span class="d">单细胞水平蛋白标志物检测</span></div></li>
+          </ol>
+        </article>
+        <article class="cat reveal reveal-2" style="--c:#8A6DDB">
+          <div class="cat-head"><h3>空间与原位组学</h3><span class="en">Spatial &amp; In Situ</span><span class="count">7 项</span></div>
+          <ol>
+            <li><div><b>空间转录组学</b><span class="d">10x cytAssist</span></div></li>
+            <li><div><b>高清空间转录组</b><span class="d">10x Visium HD</span></div></li>
+            <li><div><b>空间原位转录组学</b><span class="d">10x Xenium</span></div></li>
+            <li><div><b>华大时空转录组</b><span class="d">Stereo-seq</span></div></li>
+            <li><div><b>华大时空蛋白组</b><span class="d">Stereo CITE-seq</span></div></li>
+            <li><div><b>空间单细胞蛋白质组学 PCF</b><span class="d">CODEX</span></div></li>
+            <li><div><b>空间代谢组</b><span class="d">组织原位代谢物空间分布</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 屏 7 · 服务优势 ========== -->
+<section class="screen" id="strength">
+  <div class="bg bg-photo-b" aria-hidden="true" style="opacity:.42"></div>
+  <div class="veil" style="--g1:rgba(18,160,140,.28);--g2:rgba(47,111,219,.26)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Why Us</p>
+        <h2>我们的服务优势</h2>
+        <p class="lede">从样本接收到数据交付，全流程可追溯，方案按课题定制。</p>
+      </div>
+      <div class="s-grid">
+        <div class="s-item reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3>全流程严格质控</h3>
+          <p>交付周期短、稳定性高，关键节点可追溯。</p>
+        </div>
+        <div class="s-item reveal reveal-2">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v6M5.5 6.5l4 4M18.5 6.5l-4 4"/><ellipse cx="12" cy="16" rx="7" ry="4"/></svg>
+          <h3>样本兼容广</h3>
+          <p>组织 / 细胞 / 临床样本 / 微量珍贵样本均可承接。</p>
+        </div>
+        <div class="s-item reveal reveal-3">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l5-5 3 3 5-6 5 4"/><path d="M3 21h18"/></svg>
+          <h3>个性化生信分析</h3>
+          <p>按课题需求定制分析路径，提供售后技术支持。</p>
+        </div>
+        <div class="s-item reveal">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9.5 9.5l5 5"/></svg>
+          <h3>多组学联合方案</h3>
+          <p>从表观到翻译的联合设计，一次取样回答多层问题。</p>
+        </div>
+      </div>
+      <div class="promo reveal reveal-2" style="margin-top:22px">
+        <span class="tag">限时活动</span>
+        <p>表观组学热门项目特惠：ATAC-seq、CUT&amp;Tag 限时活动，详情请咨询 <strong>176-8176-2580</strong>（微信同号）</p>
+        <a href="#contact">获取报价 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 屏 8 · 联系我们 ========== -->
+<section class="screen" id="contact">
+  <div class="bg" aria-hidden="true" style="background-image:radial-gradient(860px 520px at 20% 24%, rgba(18,160,140,.24), transparent 60%),radial-gradient(760px 460px at 84% 80%, rgba(47,111,219,.26), transparent 60%)"></div>
+  <div class="veil" style="--g1:rgba(18,160,140,.28);--g2:rgba(138,109,219,.22)" aria-hidden="true"></div>
+  <div class="screen-inner">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="reveal">
           <p class="eyebrow">Contact</p>
           <h2>联系我们，获取方案与报价</h2>
-          <p class="sec-lede">告诉我们课题方向与样本类型，我们提供技术路线建议与报价单。</p>
+          <p class="lede">告诉我们课题方向与样本类型，我们提供技术路线建议与报价单。</p>
+          <ul class="c-list">
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+              <div><b>咨询电话</b><a href="tel:+8617681762580">176-8176-2580</a></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 9 9 0 0 1-3.8-.8L3 21l1.9-5.5a8.4 8.4 0 1 1 16.1-4z"/></svg>
+              <div><b>微信（同号）</b><span class="v">17681762580</span></div>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <div><b>响应时间</b><span class="v" style="font-size:16px">工作日 09:00–18:00</span></div>
+            </li>
+          </ul>
         </div>
-        <ul class="c-list">
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
-            <div><b>咨询电话</b><a href="tel:+8617681762580">176-8176-2580</a></div>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.4 9 9 0 0 1-3.8-.8L3 21l1.9-5.5a8.4 8.4 0 1 1 16.1-4z"/></svg>
-            <div><b>微信（同号）</b><span class="v">17681762580</span></div>
-          </li>
-          <li>
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            <div><b>响应时间</b><span class="v" style="font-size:16px">工作日 09:00–18:00</span></div>
-          </li>
-        </ul>
+        <aside class="qr-box reveal reveal-2">
+          <img src="assets/qr-440.png" alt="瑞研达生物销售微信二维码" width="440" height="440">
+          <b>微信扫码</b>
+          <span>获取方案与报价</span>
+        </aside>
       </div>
-      <aside class="qr-box">
-        <img src="assets/qr-440.png" alt="瑞研达生物销售微信二维码" width="440" height="440">
-        <b>微信扫码</b>
-        <span>获取方案与报价</span>
-      </aside>
     </div>
   </div>
 </section>
 
-<footer>
+<footer class="foot">
   <div class="wrap f-in">
     <span class="slogan">解码生命 · 洞见未来 —— 瑞研达生物 一站式多组学科研服务</span>
     <span>© 2026 瑞研达生物 · <a href="tel:+8617681762580">176-8176-2580</a></span>
